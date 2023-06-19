@@ -1,1 +1,1 @@
-# imputation_ukb_ref_panel
+# imputation ukb ref panel
