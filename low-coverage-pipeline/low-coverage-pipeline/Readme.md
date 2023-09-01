@@ -1,7 +1,7 @@
 <!-- dx-header -->
-# GLIMPSE2 (DNAnexus Platform App)
+# low-coverage-pipeline (DNAnexus Platform App)
 
-Efficient low-coverage WGS imputation using GLIMPSE2
+Pipeline for efficient low-coverage WGS imputation using GLIMPSE2
 
 This is the source code for an app that runs on the DNAnexus Platform.
 For more information about how to run or modify it, see
