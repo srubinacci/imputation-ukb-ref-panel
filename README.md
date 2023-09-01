@@ -1,7 +1,5 @@
 # UK Biobank personal imputation server
 
-***
-
 ## About
 
 Genotype imputation is a computational technique for estimating missing genotypes in SNP array data, using a reference panel of haplotypes. This approach extends to low-coverage whole genome sequencing data, aiding in filling missing genotypes or enhancing uncertain genotype calls from sequencing reads.
