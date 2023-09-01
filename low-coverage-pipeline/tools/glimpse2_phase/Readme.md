@@ -1,7 +1,7 @@
 <!-- dx-header -->
-# impute5 (DNAnexus Platform App)
+# GLIMPSE2 (DNAnexus Platform App)
 
-efficient genotype imputation using the PBWT
+Efficient low-coverage WGS imputation using GLIMPSE2
 
 This is the source code for an app that runs on the DNAnexus Platform.
 For more information about how to run or modify it, see
