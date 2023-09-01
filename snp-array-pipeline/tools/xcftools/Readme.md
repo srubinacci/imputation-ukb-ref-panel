@@ -1,7 +1,7 @@
 <!-- dx-header -->
-# impute5 (DNAnexus Platform App)
+# xcftools (DNAnexus Platform App)
 
-efficient genotype imputation using the PBWT
+Create binary format for the reference and target panel files.
 
 This is the source code for an app that runs on the DNAnexus Platform.
 For more information about how to run or modify it, see
