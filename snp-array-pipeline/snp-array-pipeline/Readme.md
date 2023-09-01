@@ -1,7 +1,7 @@
 <!-- dx-header -->
-# impute5 (DNAnexus Platform App)
+# snp-array-pipeline (DNAnexus Platform App)
 
-efficient genotype imputation using the PBWT
+Pipeline for efficient SNP array imputation using IMPUTE5
 
 This is the source code for an app that runs on the DNAnexus Platform.
 For more information about how to run or modify it, see
