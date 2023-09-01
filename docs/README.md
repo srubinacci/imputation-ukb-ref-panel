@@ -32,8 +32,8 @@ The pipeline's default parameters are provide for cost-efficiency with few hundr
 
 The low-coverage WGS imputation pipeline consists of two modules:
 
-1. Convert reference: this module is the first step when setting up the pipeline and it is run only once. Its purpose is to convert the phased pVCF files from the RAP into the binary representation of <mark style="color:orange;">GLIMPSE2</mark> using <mark style="color:orange;">GLIMPSE\_split\_reference</mark>.&#x20;
-2. Imputation: this module is responsible for performing genotype imputation using <mark style="color:orange;">GLIMPSE2</mark>. It is the most computationally intensive task in the pipeline, taking in input the binary reference panel files and a set of BAM/CRAM files.&#x20;
+1. Convert reference: this module is the first step when setting up the pipeline and it is run only once. Its purpose is to convert the phased pVCF files from the RAP into the binary representation of GLIMPSE2 using GLIMPSE\_split\_reference.&#x20;
+2. Imputation: this module is responsible for performing genotype imputation using GLIMPSE2. It is the most computationally intensive task in the pipeline, taking in input the binary reference panel files and a set of BAM/CRAM files.&#x20;
 3. Ligation: at the end of the imputation step, a single ligation step is performed to provide chromosome-level phased genotypes.
 
 
@@ -64,7 +64,7 @@ The SNP array imputation pipeline is comprised of four sequential modules, each 
 1. **Convert Reference**: This module, executed only once during pipeline setup, constitutes the initial step. Its purpose revolves around converting the phased pVCF files from the RAP into the XCF sparse format, which is employed by SHAPEIT5 and IMPUTE5.
 2. **Prephasing**: Employing the SHAPEIT5 phase\_common tool, this module is pivotal for prephasing data, especially when working with unphased SNP array data. The outcome is a phased target file in the XCF binary format.
 3. **Imputation**: The heart of computational intensity within the pipeline lies in this module. It shoulders the responsibility of genotype imputation through IMPUTE5 v1.2. The task hinges on input XCF files from both the reference and target panels.
-4. [**Ligation**](#user-content-fn-1)[^1]: Upon concluding the imputation phase, a single ligation process is conducted to yield chromosome-level phased genotypes. This step becomes necessary due to the data's prephased nature in chunks. In cases where prephasing encompasses the entire chromosome, this ligation step becomes redundant as a single concatenation (e.g., employing bcftools concat) significantly expedites the process.
+4. **Ligation:** Upon concluding the imputation phase, a single ligation process is conducted to yield chromosome-level phased genotypes. This step becomes necessary due to the data's prephased nature in chunks. In cases where prephasing encompasses the entire chromosome, this ligation step becomes redundant as a single concatenation (e.g., employing bcftools concat) significantly expedites the process.
 
 Ongoing pipeline developments aim to eliminate the necessity for a final ligation step. This will involve the concatenation of SNP array prephased data within the xcf file format.
 
@@ -82,6 +82,3 @@ GLIMPSE2 is available [HERE](https://github.com/odelaneau/GLIMPSE).
 
 IMPUTE5 is available [HERE](https://jmarchini.org/software/#impute-5).
 
-
-
-[^1]: 
