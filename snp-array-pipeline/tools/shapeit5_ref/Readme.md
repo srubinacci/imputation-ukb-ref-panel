@@ -1,7 +1,7 @@
 <!-- dx-header -->
-# impute5 (DNAnexus Platform App)
+# SHAPEIT5_phase_common (DNAnexus Platform App)
 
-efficient genotype imputation using the PBWT
+Reference panel phasing for prephasing of SNP array data
 
 This is the source code for an app that runs on the DNAnexus Platform.
 For more information about how to run or modify it, see
