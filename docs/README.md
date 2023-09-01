@@ -1,5 +1,5 @@
 ---
-description: Genotype imputation pipelines on the UK Biobank Research Analysis Platform
+description: Genotype mputation pipelines for the UK Biobank Research Analysis Platform
 layout:
   title:
     visible: true
@@ -14,6 +14,10 @@ layout:
 ---
 
 # UK Biobank personal imputation server
+
+***
+
+## About
 
 ***
 
@@ -45,7 +49,7 @@ If you use the pipelines in your research work, please cite the following papers
 
 ## Quick links
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Get started</strong></td><td>Prepare the phased data in  the right format/location.</td><td></td><td><a href=".gitbook/assets/Screenshot from 2023-09-01 16-03-55.png">Screenshot from 2023-09-01 16-03-55.png</a></td><td><a href="getting-started.md">getting-started.md</a></td></tr><tr><td><strong>Low coverage pipeline</strong></td><td>Instructions to run the low-coverage pipeline</td><td></td><td><a href=".gitbook/assets/g2 (1).png">g2 (1).png</a></td><td><a href="running-the-low-coverage-pipeline.md">running-the-low-coverage-pipeline.md</a></td></tr><tr><td><strong>SNP array pipeline</strong></td><td>Instructions to run the SNP array pipeline</td><td></td><td><a href=".gitbook/assets/g2 (2).png">g2 (2).png</a></td><td><a href="running-the-snp-array-pipeline.md">running-the-snp-array-pipeline.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Get started</strong></td><td>Prepare the phased data in  the right format/location.</td><td></td><td><a href=".gitbook/assets/rap_homepage.png">rap_homepage.png</a></td><td><a href="getting-started.md">getting-started.md</a></td></tr><tr><td><strong>Low coverage pipeline</strong></td><td>Instructions to run the low-coverage pipeline</td><td></td><td><a href=".gitbook/assets/g2 (1).png">g2 (1).png</a></td><td><a href="running-the-low-coverage-pipeline.md">running-the-low-coverage-pipeline.md</a></td></tr><tr><td><strong>SNP array pipeline</strong></td><td>Instructions to run the SNP array pipeline</td><td></td><td><a href=".gitbook/assets/i5.png">i5.png</a></td><td><a href="running-the-snp-array-pipeline.md">running-the-snp-array-pipeline.md</a></td></tr></tbody></table>
 
 ***
 
