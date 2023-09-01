@@ -19,10 +19,6 @@ layout:
 
 ## About
 
-***
-
-## About
-
 Genotype imputation is a computational technique for estimating missing genotypes in SNP array data, using a reference panel of haplotypes. This approach extends to low-coverage whole genome sequencing data, aiding in filling missing genotypes or enhancing uncertain genotype calls from sequencing reads.
 
 For both SNP array and low-coverage whole genome sequencing data, we've created two distinct pipelines using the **UK Biobank reference panel (>200,000 samples; 700M variants)** for genotype imputation. To ensure cost-effective implementation, we leverage efficient state-of-the-art tools, including [IMPUTE5](https://doi.org/10.1371/journal.pgen.1009049) (Rubinacci et al., 2020) for SNP array imputation and [GLIMPSE2](https://doi.org/10.1038/s41588-023-01438-3) (Rubinacci et al., 2023) for low-coverage WGS imputation.
