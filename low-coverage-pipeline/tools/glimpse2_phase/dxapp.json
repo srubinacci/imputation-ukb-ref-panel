@@ -1,0 +1,139 @@
+{
+  "name": "glimpse2_phase",
+  "title": "glimpse2_phase",
+  "summary": "low-coverage imputation",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+  "inputSpec": [
+    {
+      "name": "ref_bin",
+      "label": "binary file of reference panel of haplotypes",
+      "class": "file",
+      "optional": true,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_bams",
+      "label": "bam/cram list for target samples (paths need to start with /mnt/project)",
+      "class": "file",
+      "optional": true,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "fasta_ref",
+      "label": "Reference sequence file in the appropriate genome build",
+      "class": "file",
+      "optional": true,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "fasta_idx",
+      "label": "faidx-index of the reference sequence file in the appropriate genome build",
+      "class": "file",
+      "optional": true,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_pfx",
+      "label": "prefix for output files",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "num_thr",
+      "label": "number of threads",
+      "class": "int",
+      "optional": true,
+      "default" : 1,
+      "help": ""
+    },
+    {
+      "name": "imp_arg",
+      "label": "extra imputation arguments",
+      "class": "string",
+      "optional": true,
+      "default": "",
+      "help": ""
+    },
+    {
+      "name": "mount_inputs",
+      "label": "whether to mount all files that were supplied as inputs to the app instead of downloading them to the local storage of the execution worker",
+      "class": "boolean",
+      "optional": true,
+      "default" : true,
+      "help": ""
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "out_bcf",
+      "label": "output bcf file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_idx",
+      "label": "output index file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_log",
+      "label": "output log file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_tim",
+      "label": "output time file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 24
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/glimpse2_phase.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+  },
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem2_ssd1_v2_x4"
+        }
+      }
+    }
+  }
+}

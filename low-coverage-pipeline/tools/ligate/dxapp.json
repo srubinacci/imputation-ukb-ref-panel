@@ -1,0 +1,72 @@
+{
+  "name": "ligate",
+  "title": "ligate",
+  "summary": "ligate multiple imputed files into chromosome-wide files",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+  "inputSpec": [
+    {
+      "name": "inp_pfx",
+      "label": "prefix for input files",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "out_pfx",
+      "label": "prefix for output files",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "num_thr",
+      "label": "number of threads",
+      "class": "int",
+      "optional": true,
+      "default" : 1,
+      "help": ""
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "out_bcf",
+      "label": "output bcf file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_idx",
+      "label": "output index file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 24
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/ligate.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+  },
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_v2_x4"
+        }
+      }
+    }
+  }
+}

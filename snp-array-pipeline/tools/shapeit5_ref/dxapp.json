@@ -1,0 +1,193 @@
+{
+  "name": "shapeit5_ref",
+  "title": "shapeit5_ref",
+  "summary": "shapeit version 5",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+  "inputSpec": [
+    {
+      "name": "ref_bcf",
+      "label": "reference panel of haplotypes",
+      "class": "file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_idx",
+      "label": "index of reference panel of haplotypes",
+      "class": "file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_bin",
+      "label": "xcf binary file of reference panel of haplotypes",
+      "class": "file",
+      "optional": true,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_fam",
+      "label": "xcf fam file of reference panel of haplotypes",
+      "class": "file",
+      "optional": true,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_bcf",
+      "label": "target panel to be phased",
+      "class": "file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_idx",
+      "label": "index of the target panel",
+      "class": "file",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "map",
+      "label": "genetic map",
+      "class": "file",
+      "optional": true,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_pfx",
+      "label": "prefix for output files",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "out_fmt",
+      "label": "format for output files",
+      "class": "string",
+      "optional": true,
+      "default" : "bh",
+      "help": ""
+    },
+    {
+      "name": "reg",
+      "label": "phasing region",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "num_thr",
+      "label": "number of threads",
+      "class": "int",
+      "optional": true,
+      "default" : 1,
+      "help": ""
+    },
+    {
+      "name": "shp_arg",
+      "label": "extra phasing arguments",
+      "class": "string",
+      "optional": true,
+      "default": "",
+      "help": ""
+    },
+    {
+      "name": "mount_inputs",
+      "label": "whether to mount all files that were supplied as inputs to the app instead of downloading them to the local storage of the execution worker",
+      "class": "boolean",
+      "optional": true,
+      "default" : true,
+      "help": ""
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "out_bcf",
+      "label": "output bcf file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_idx",
+      "label": "output index file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_bin",
+      "label": "output bin file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_fam",
+      "label": "output fam file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_log",
+      "label": "output log file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 24
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/shapeit5_ref.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+  },
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem2_ssd1_v2_x4"
+        }
+      }
+    }
+  }
+}

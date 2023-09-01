@@ -1,0 +1,257 @@
+{
+  "name": "low-coverage-pipeline",
+  "title": "low-coverage-pipeline",
+  "summary": "Pipeline for low-coverage WGS imputation using the UKB 200k reference panel with GLIMPSE2",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+
+  "inputSpec": [
+    {
+      "name": "project",
+      "label": "DNAnexus project name",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "run_convert_reference_module",
+      "label": "create reference panel in binary format",
+      "class": "boolean",
+      "optional": true,
+      "default" : false,
+      "help": ""
+    },
+    {
+      "name": "run_impute_module",
+      "label": "perform genotype imputation",
+      "class": "boolean",
+      "optional": true,
+      "default" : true,
+      "help": ""
+    },    
+    {
+      "name": "app_pth",
+      "label": "apps path",
+      "class": "string",
+      "optional": true,
+      "default": "apps/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_bcf_pth",
+      "label": "reference panel path in bcf file format",
+      "class": "string",
+      "optional": true,
+      "default": "Phasing/step3_phase_rare/Validation/support/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_bin_pth",
+      "label": "reference panel path in binary file format",
+      "class": "string",
+      "optional": true,
+      "default": "data/glimpse2/ref_bin_phased/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_bams_pth",
+      "label": "location of the list of BAM files paths",
+      "class": "string",
+      "optional": true,
+      "default": "data/glimpse2/tar_bam_list/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "fasta_ref",
+      "label": "Reference sequence fasta file",
+      "class": "string",
+      "optional": true,
+      "default": "data/glimpse2/ref_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "fasta_idx",
+      "label": "Fasta index",
+      "class": "string",
+      "optional": true,
+      "default": "data/glimpse2/ref_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "map_pth",
+      "label": "genetic map path",
+      "class": "string",
+      "optional": true,
+      "default": "data/glimpse2/maps/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "cnk_pth",
+      "label": "imputation chunk file path",
+      "class": "string",
+      "optional": true,
+      "default": "data/glimpse2/chunks/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+        {
+      "name": "out_pth",
+      "label": "output directory path",
+      "class": "string",
+      "optional": true,
+      "default": "/data/glimpse2/out/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_pfx",
+      "label": "reference panel prefix name",
+      "class": "string",
+      "optional": true,
+      "default": "ukb200k_chr",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_sfx",
+      "label": "reference panel suffix name",
+      "class": "string",
+      "optional": true,
+      "default": ".full.shapeit5_rare.reference_panel",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_pfx",
+      "label": "target list prefix name",
+      "class": "string",
+      "optional": true,
+      "default": "bam_samples_105_",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_sfx",
+      "label": "target list suffix name",
+      "class": "string",
+      "optional": true,
+      "default": ".txt",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "batch_id",
+      "label": "string used to identify batch of data (set of target samples)",
+      "class": "string",
+      "optional": true,
+      "default": "batch_00000",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "chr",
+      "label": "chromosome name",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "imp_arg",
+      "label": "glimpse2 additional arguments",
+      "class": "string",
+      "optional": true,
+      "default": "",
+      "help": ""
+    },
+    {
+      "name": "mount_inputs",
+      "label": "whether to mount all files that were supplied as inputs to the app instead of downloading them to the local storage of the execution worker",
+      "class": "boolean",
+      "optional": true,
+      "default" : false,
+      "help": ""
+    },
+    {
+      "name": "conversion_instance_type",
+      "label": "instance type used for binary conversions",
+      "class": "string",
+      "optional": true,
+      "default": "mem2_ssd1_v2_x4",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "imputation_instance_type",
+      "label": "instance type used for glimpse2 imputation",
+      "class": "string",
+      "optional": true,
+      "default": "mem2_ssd1_v2_x4",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "outputSpec": [],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "days": 1
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/pipeline.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+  },
+  "access": {
+    "project": "CONTRIBUTE"
+  },
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_v2_x2"
+        }
+      }
+    }
+  }
+}

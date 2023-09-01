@@ -1,0 +1,281 @@
+{
+  "name": "snp-array-pipeline",
+  "title": "snp-array-pipeline",
+  "summary": "pipeline for genotype imputation using the UKB 200k reference panel with IMPUTE5",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+
+  "inputSpec": [
+    {
+      "name": "project",
+      "label": "DNAnexus project name",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "run_convert_reference_module",
+      "label": "create reference panel in xcf format",
+      "class": "boolean",
+      "optional": true,
+      "default" : false,
+      "help": ""
+    },
+    {
+      "name": "run_phase_module",
+      "label": "perform pre-phasing on the SNP array data using shapeit5_phase_common",
+      "class": "boolean",
+      "optional": true,
+      "default" : false,
+      "help": ""
+    },
+    {
+      "name": "run_convert_target_module",
+      "label": "perform conversion of the already phased bcf files in xcf format, without running prephasing",
+      "class": "boolean",
+      "optional": true,
+      "default" : false,
+      "help": ""
+    },
+    {
+      "name": "run_impute_module",
+      "label": "perform genotype imputation",
+      "class": "boolean",
+      "optional": true,
+      "default" : true,
+      "help": ""
+    },    
+    {
+      "name": "app_pth",
+      "label": "apps path",
+      "class": "string",
+      "optional": true,
+      "default": "apps/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_bcf_pth",
+      "label": "reference panel path in bcf file format",
+      "class": "string",
+      "optional": true,
+      "default": "Phasing/step3_phase_rare/Validation/support/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_xcf_pth",
+      "label": "reference panel path in xcf file format",
+      "class": "string",
+      "optional": true,
+      "default": "data/impute5/ref_xcf_phased/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_bcf_pth",
+      "label": "target panel path (unphased data)",
+      "class": "string",
+      "optional": true,
+      "default": "data/PhasingSNParray/step6_imputation_1k/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_xcf_pth",
+      "label": "target panel path (pre-hased data)",
+      "class": "string",
+      "optional": true,
+      "default": "data/impute5/tar_xcf_phased/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "map_pth",
+      "label": "genetic map path",
+      "class": "string",
+      "optional": true,
+      "default": "data/impute5/maps/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "cnk_pth",
+      "label": "imputation chunk file path",
+      "class": "string",
+      "optional": true,
+      "default": "data/impute5/chunks/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+        {
+      "name": "out_pth",
+      "label": "output directory path",
+      "class": "string",
+      "optional": true,
+      "default": "/data/impute5/out/",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_pfx",
+      "label": "reference panel prefix name",
+      "class": "string",
+      "optional": true,
+      "default": "ukb200k_chr",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_sfx",
+      "label": "reference panel suffix name",
+      "class": "string",
+      "optional": true,
+      "default": ".full.shapeit5_rare.reference_panel",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_pfx",
+      "label": "target panel prefix name",
+      "class": "string",
+      "optional": true,
+      "default": "full_c",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_sfx",
+      "label": "target panel suffix name",
+      "class": "string",
+      "optional": true,
+      "default": "_b0_v2.b38.sorted.phased_shapeit5_common.renamed.1k_imputation_samples",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "batch_id",
+      "label": "string used to identify batch of data (set of target samples)",
+      "class": "string",
+      "optional": true,
+      "default": "batch_00000",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "chr",
+      "label": "chromosome name",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "phs_arg",
+      "label": "shapeit5 arguments",
+      "class": "string",
+      "optional": true,
+      "default": "",
+      "help": ""
+    },
+    {
+      "name": "imp_arg",
+      "label": "impute5 arguments",
+      "class": "string",
+      "optional": true,
+      "default": "",
+      "help": ""
+    },
+    {
+      "name": "mount_inputs",
+      "label": "whether to mount all files that were supplied as inputs to the app instead of downloading them to the local storage of the execution worker",
+      "class": "boolean",
+      "optional": true,
+      "default" : false,
+      "help": ""
+    },
+    {
+      "name": "conversion_instance_type",
+      "label": "instance type used for xcf conversions",
+      "class": "string",
+      "optional": true,
+      "default": "mem1_ssd1_v2_x4",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "phasing_instance_type",
+      "label": "instance type used for pre-phasing",
+      "class": "string",
+      "optional": true,
+      "default": "mem2_ssd1_v2_x4",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "imputation_instance_type",
+      "label": "instance type used for impute5 imputation",
+      "class": "string",
+      "optional": true,
+      "default": "mem2_ssd1_v2_x4",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "outputSpec": [],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "days": 1
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/pipeline.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+  },
+  "access": {
+    "project": "CONTRIBUTE"
+  },
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_v2_x2"
+        }
+      }
+    }
+  }
+}
