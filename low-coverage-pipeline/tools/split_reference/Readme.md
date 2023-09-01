@@ -1,7 +1,7 @@
 <!-- dx-header -->
-# impute5 (DNAnexus Platform App)
+# GLIMPSE2_split_reference (DNAnexus Platform App)
 
-efficient genotype imputation using the PBWT
+Creates binary files for reference panel
 
 This is the source code for an app that runs on the DNAnexus Platform.
 For more information about how to run or modify it, see
