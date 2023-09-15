@@ -4,6 +4,15 @@ description: SNP array imputation using IMPUTE5 and the UK Biobank reference pan
 
 # Running the SNP array pipeline
 
+### Uploading SNP array data data (VCF/BCF)
+
+As a user of the SNP array pipeline you are expected to upload your SNP array files. Your files can be located anywhere on the RAP and can be phased or unphased. By convention, your unphased SNP array data should go in the following folder:
+
+<pre class="language-bash"><code class="lang-bash"><strong>ukb-imputation/impute5/tar_bcf_files/ #location of the target panel in VCF/BCF format
+</strong></code></pre>
+
+The names used and the structure of this directory is arbitrary and the user can decide how to better organise it. You will need a VCF/BCF file per chromosome (per batch). You can tell the pipeline what VCF/BCF file to use using the `tar_pfx` and `tar_sfx` parameters (see below).
+
 ### First time usage
 
 Running the pipeline with default parameters, performing conversion of the reference panel file format and prephasing can be done as follows:

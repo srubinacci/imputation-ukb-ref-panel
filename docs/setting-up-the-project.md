@@ -10,12 +10,29 @@ In order to run the tutorials, you need to be a registered UK Biobank researcher
 
 The [DNAnexus SDK (`dx-toolkit`)](broken-reference) is required. Please download, install and setup the dx-toolkit as instructred by DNAnexus. A quick introduction on the dx-toolkit can be found [here](https://documentation.dnanexus.com/getting-started/cli-quickstart).
 
-We first create a folder called <mark style="color:orange;">`apps`</mark> where all the applets will go. We create this folder on the home directiory:
+We first create a folder called <mark style="color:orange;">`apps`</mark> where all the applets will go. We create this folder on the home directiory. We also create some other helpul directories for the two projects:
 
-```bash
-dx cd
-dx mkdir -p apps
-```
+<pre class="language-bash"><code class="lang-bash">dx cd
+
+dx mkdir -p ukb-imputation #home directory for both pipelines
+dx mkdir -p ukb-imputation/apps #location of the applets
+dx mkdir -p ukb-imputation/maps #location of the genetics maps (same for both pipelines)
+
+dx mkdir -p ukb-imputation/glimpse2 #home directory for the low-coverage pipeline
+dx mkdir -p ukb-imputation/glimpse2/chunks #location of the chunks for low-coverage pipeline
+dx mkdir -p ukb-imputation/glimpse2/ref_genome #location of reference genome (fasta + fai)
+dx mkdir -p ukb-imputation/glimpse2/ref_bin_phased #location of the reference panel in binary format
+<strong>dx mkdir -p ukb-imputation/glimpse2/tar_bam_list #location of list of BAM/CRAMs
+</strong>dx mkdir -p ukb-imputation/glimpse2/tar_bam_files #location of the uploaded BAM/CRAMs
+dx mkdir -p ukb-imputation/glimpse2/out #location of the output imputed data
+
+dx mkdir -p ukb-imputation/impute5 #home directory for the snp-array pipeline
+dx mkdir -p ukb-imputation/impute5/chunks #location of the chunks for snp-array pipeline
+dx mkdir -p ukb-imputation/impute5/ref_xcf_phased #location of the reference panel in binary format
+dx mkdir -p ukb-imputation/impute5/tar_xcf_phased #location of the target panel in binary format
+dx mkdir -p ukb-imputation/impute5/tar_bcf_files #location of the target panel in VCF/BCF format
+dx mkdir -p ukb-imputation/impute5/out #location of the output imputed data
+</code></pre>
 
 ### Download the repository
 
@@ -31,13 +48,57 @@ We then move to the folder that we just created:
 cd imputation-ukb-ref-panel
 ```
 
-You have two folders here, one for the the low-coverage pipeline and one for the SNP array pipeline.
+You have two folders here, one for the the low-coverage pipeline and one for the SNP array pipeline. The tutorial always assume that the current working directory is imputation-ukb-ref-panel (please do not cd to another directory).
 
 ### Upload the resource data
 
-Imputation pipelines are run in chunks and use the same map files.&#x20;
+Imputation pipelines use the same genetic map files. These files are in the on the Github project of the pipeline under the data folder. You will need to upload these files in your project.
 
+```bash
+dx upload -r data/maps --path ukb-imputation/
+```
 
+This will upload the maps  files in the expected location.
+
+Additional mandatory data can be uploaded using the procedure illustrated in the following boxes.
+
+<details>
+
+<summary>Low-coverage chunks</summary>
+
+Pre-computed chunks of \~4 cM length can be uploaded using:
+
+<pre><code><strong>dx upload -r data/chunks/glimpse2/* --path ukb-imputation/glimpse2/chunks/
+</strong></code></pre>
+
+</details>
+
+<details>
+
+<summary>GRCh38 reference genome</summary>
+
+The reference genome in b38 is necessary to process CRAM files. We download it from 1000 Genomes EBI ftp server and upload it on the RAP in the expected folder:
+
+```bash
+wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
+wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai
+
+dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa --path ukb-imputation/glimpse/ref_genome/
+dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa.fai --path ukb-imputation/glimpse/ref_genome/
+```
+
+</details>
+
+<details>
+
+<summary>SNP array chunks</summary>
+
+Pre-computed chunks of \~40 cM length can be uploaded using:
+
+<pre><code><strong>dx upload -r data/chunks/impute5/* --path ukb-imputation/impute5/chunks/
+</strong></code></pre>
+
+</details>
 
 ### Compile the low-coverage pipeline
 
@@ -86,10 +147,10 @@ mv GLIMPSE2_ligate low-coverage-pipeline/tools/ligate/resources/usr/bin/
 Compile the applets using the dx compile command:
 
 ```bash
-dx build low-coverage-pipeline/tools/split_reference -d apps/ -f 
-dx build low-coverage-pipeline/tools/glimpse2_phase -d apps/ -f 
-dx build low-coverage-pipeline/tools/ligate -d apps/ -f 
-dx build low-coverage-pipeline/low-coverage-pipeline -d apps/ -f 
+dx build low-coverage-pipeline/tools/split_reference -d ukb-imputation/apps/ -f 
+dx build low-coverage-pipeline/tools/glimpse2_phase -d ukb-imputation/apps/ -f 
+dx build low-coverage-pipeline/tools/ligate -d ukb-imputation/apps/ -f 
+dx build low-coverage-pipeline/low-coverage-pipeline -d ukb-imputation/apps/ -f 
 ```
 
 You should now see the applets appearing on the RAP in the apps folder.
@@ -150,11 +211,11 @@ mv GLIMPSE2_ligate snp-array-pipeline/tools/ligate/resources/usr/bin/
 Compile the applets using the dx compile command:
 
 ```bash
-dx build snp-array-pipeline/tools/impute5 -d apps/ -f 
-dx build snp-array-pipeline/tools/shapeit5_ref -d apps/ -f 
-dx build snp-array-pipeline/tools/xcftools -d apps/ -f 
-dx build snp-array-pipeline/tools/ligate -d apps/ -f 
-dx build snp-array-pipeline/snp-array-pipeline -d apps/ -f 
+dx build snp-array-pipeline/tools/impute5 -d ukb-imputation/apps/ -f 
+dx build snp-array-pipeline/tools/shapeit5_ref -d ukb-imputation/apps/ -f 
+dx build snp-array-pipeline/tools/xcftools -d ukb-imputation/apps/ -f 
+dx build snp-array-pipeline/tools/ligate -d ukb-imputation/apps/ -f 
+dx build snp-array-pipeline/snp-array-pipeline -d ukb-imputation/apps/ -f 
 ```
 
 You should now see the applets appearing on the RAP in the apps folder.
