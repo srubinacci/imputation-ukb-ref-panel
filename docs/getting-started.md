@@ -16,6 +16,8 @@ The SHAPEIT5 data can be accessed through the [data field labelled as 20279](htt
 
 Please note that the data is organized by chromosome, and for chromosome X, only the non-PAR (non-pseudoautosomal) region has been phased and made available.
 
+The reference panel is only in GRCh38 assembly. GRCh37 version is not available.
+
 ***
 
 ### Oveview of the pipelines

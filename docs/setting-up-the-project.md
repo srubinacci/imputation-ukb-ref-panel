@@ -2,7 +2,7 @@
 description: Upload files and compile the applets on the RAP
 ---
 
-# Setting up the RAP
+# Setting up the project
 
 ### UK Biobank RAP
 
@@ -32,6 +32,12 @@ cd imputation-ukb-ref-panel
 ```
 
 You have two folders here, one for the the low-coverage pipeline and one for the SNP array pipeline.
+
+### Upload the resource data
+
+Imputation pipelines are run in chunks and use the same map files.&#x20;
+
+
 
 ### Compile the low-coverage pipeline
 
@@ -101,7 +107,7 @@ There are three tools you need to download for the low-coverage pipeline:
 
 Several tools are used in this pipeline. Please download each of the tools separately. Keep in mind that IMPUTE5 is free only for academic use, please read the licence before using the software.&#x20;
 
-* Static versions of XCFTOOLS and IMPUTE5 can be downlaoded from the [IMPUTE5 website](https://jmarchini.org/software/#impute-5).
+* Static versions of XCFTOOLS and IMPUTE5 can be downloaded from the [IMPUTE5 website](https://jmarchini.org/software/#impute-5).
 * SHAPEIT5\_phase\_common can be downloaded from the in the [release section on Github.](https://github.com/odelaneau/shapeit5/releases)
 * GLIMPSE2\_ligate can be downloaded from the in the [release section on Github](https://github.com/odelaneau/GLIMPSE/releases).
 
