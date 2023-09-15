@@ -13,7 +13,7 @@ Running the pipeline with default parameters, performing conversion of the refer
 
 <strong>for CHR in 20; do #use {1..22} for all autosomes
 </strong>    dx run /apps/low-coverage-pipeline \
-        --name "low-coverage-pipeline-chr${CHR}"  \
+        --name "low-coverage-pipeline-chr${CHR}-b00001"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_convert_reference_module=true" \
@@ -36,7 +36,7 @@ PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
 
 for CHR in 20; do #use {1..22} for all autosomes
     dx run /apps/low-coverage-pipeline \
-        --name "low-coverage-pipeline-chr${CHR}"  \
+        --name "low-coverage-pipeline-chr${CHR}-b00002"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_convert_reference_module=false" \ #<---
@@ -47,7 +47,7 @@ for CHR in 20; do #use {1..22} for all autosomes
 done
 ```
 
-Please not we deactivated the covert reference module.
+Please note we deactivated the covert reference module.
 
 ### Changing default parameters
 
@@ -69,7 +69,7 @@ PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
 
 for CHR in 20; do #use {1..22} for all autosomes
     dx run /apps/low-coverage-pipeline \
-        --name "low-coverage-pipeline-chr${CHR}"  \
+        --name "low-coverage-pipeline-chr${CHR}-b99999"  \ #<--- optional
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_convert_reference_module=false" \
