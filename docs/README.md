@@ -1,5 +1,5 @@
 ---
-description: Genotype mputation pipelines for the UK Biobank Research Analysis Platform
+description: Genotype imputation pipelines for the UK Biobank Research Analysis Platform
 layout:
   title:
     visible: true

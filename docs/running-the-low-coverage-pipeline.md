@@ -1,3 +1,3 @@
 # Running the low-coverage pipeline
 
-Comings soon!
+Coming soon!
