@@ -83,9 +83,17 @@ The reference genome in b38 is necessary to process CRAM files. We download it f
 wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
 wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai
 
-dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa --path ukb-imputation/glimpse/ref_genome/
-dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa.fai --path ukb-imputation/glimpse/ref_genome/
+dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa --path ukb-imputation/glimpse2/ref_genome/
+dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa.fai --path ukb-imputation/glimpse2/ref_genome/
 ```
+
+**Faster (but manual) alternative**
+
+Downloading data from the EBI ftp server might be slow outside the UK. However, as the UK Biobank RAP is located in London, we can download the file directly on the RAP. To do that you can use the ttyd app for an interactive session, or alternatively use the url\_fetcher app. Here we quickly describe how to use this second option.
+
+To use the url\_fetcher app, just browse in Tool library -> URL Fetcher -> Run. The output destination needs to be the expected path: `ukb-imputation/glimpse2/ref_genome/`.&#x20;
+
+Put the URL (indicated above) in the right textbox. No need to fill in the optional file name. When you are ready, press "Start Analysis" on the top right. When the job ends, the file will be found in the right location. Finally, repeat this step for the .fai index.
 
 </details>
 
