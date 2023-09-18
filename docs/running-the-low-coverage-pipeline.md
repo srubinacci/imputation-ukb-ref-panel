@@ -38,7 +38,7 @@ Where the prefix of the filename is treated as the sample ID. To have a custom I
 
 A list containes the sample of a single batch. You can tell the pipeline what list to use using the `tar_pfx` and `tar_sfx` parameters (see below).
 
-### First time usage
+### First time usage - Create the binary reference panel representation
 
 Running the pipeline with default parameters, performing conversion of the reference panel file format can be done as follows:
 
@@ -51,16 +51,18 @@ Running the pipeline with default parameters, performing conversion of the refer
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_convert_reference_module=true" \
-        -i "run_impute_module=true" \
-        -i "batch_id=batch_00001" \
+        -i "run_impute_module=false" \
+        -i "mount_inputs=true" \
         -y \
         --brief
 done
 </code></pre>
 
-You can specify `-i "run_impute_module=false"` to only perform reference panel conversion and skipping the imputation.
+You can specify `-i "run_impute_module=true"` to perform reference panel conversion and the imputation step subsequently. However we do not recommend doing so. As the conversion step works with ineffecient VCF files, the conversion can take several hours to complete. We therefore recommend splitting the creation of the reference panel from the imputation step.
 
-### Subsequent usages
+Please note that we use the option `-i "mount_inputs=true"` in the command above. The reason is that the provided phased VCF files are very large and we want to access only a region within a chromosome. Therefore, downloading the whole file would be wasteful. The option `-i "run_impute_module=true"` allows is to use the `dxfuse`program to stream the file as it was local, therefore efficiently accessing only the region of interest. However, in the rest of the pipeline we assume the default `-i "mount_inputs=false"` as we handle much smaller files and donwloading is usually more efficient.
+
+### Subsequent usages - Run the imputation
 
 For subsequent usages, the creation of the binary reference panel can be skipped as the reference panel is stored in your project directiory. You can therefore run:
 
