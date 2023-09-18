@@ -4,7 +4,7 @@ description: Low-coverage imputation using GLIMPSE2 and the UK Biobank reference
 
 # Running the low-coverage pipeline
 
-### Uploading low-coverage data (BAM/CRAMs)
+## 1. Uploading low-coverage data (BAM/CRAMs)
 
 As a user of the low-coverage pipeline, you are expected to upload your low-coverage BAM/CRAM files (one file per sample per chromosome). Your files can be located anywhere on the RAP, but by convention, you should use the following folder:
 
@@ -38,7 +38,7 @@ Where the prefix of the filename is treated as the sample ID. To have a custom I
 
 A list contains the sample of a single batch. You can tell the pipeline what list to use using the `tar_pfx` and `tar_sfx` parameters (see below).
 
-### First-time usage - Create the binary reference panel representation
+## 2. First-time usage - Binary reference panel representation
 
 Running the pipeline with default parameters, and performing conversion of the reference panel file format can be done as follows:
 
@@ -62,7 +62,7 @@ You can specify `-i "run_impute_module=true"` to perform reference panel convers
 
 Please note that we use the option `-i "mount_inputs=true"` in the command above. The reason is that the provided phased VCF files are very large and we want to access only a region within a chromosome. Therefore, downloading the whole file would be wasteful. The option `-i "run_impute_module=true"` allows us to use the `dxfuse`program to stream the file as it was local, therefore efficiently accessing only the region of interest. However, in the rest of the pipeline, we assume the default `-i "mount_inputs=false"` as we handle much smaller files and downloading is usually more efficient.
 
-### Subsequent usages - Run the imputation
+## 3. Subsequent usages - Run the imputation
 
 For subsequent usages, the creation of the binary reference panel can be skipped as the reference panel is stored in your project directory. You can therefore run:
 
@@ -87,7 +87,7 @@ done
 
 Please note we deactivated the covert reference module.
 
-### Changing default parameters
+## 4. Changing default parameters
 
 The pipeline has several default parameters that can be changed. To obtain the full list of options, you can run:
 
@@ -120,7 +120,7 @@ for CHR in 20; do #use {1..22} for all autosomes
 done
 ```
 
-### Output and temporary files
+## 5. Output and temporary files
 
 By default, the pipeline keeps the intermediate (chunk-level) imputed files and also provides a chromosome-level file per chromosome. For example, after imputing data for chromosomes 20-22 for a batch of samples (batch\_00000), the pipeline will by default create a subfolder named `batch_00000` in the directory `data/glimpse2/out/`. The content of this folder will look like this:
 

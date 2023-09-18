@@ -1,8 +1,12 @@
+---
+description: A guide to upload pipeline-specific data and app compilation
+---
+
 # Setting up the SNP array pipeline
 
-## Upload project-specific data
+## 1. Upload project-specific data
 
-### 1. Chunk files
+### 1.1. Chunk files
 
 Pre-computed chunks of \~40 cM length can be uploaded using:
 
@@ -11,7 +15,7 @@ Pre-computed chunks of \~40 cM length can be uploaded using:
 
 ***
 
-## Compile the low-coverage pipeline
+## 2. Compile the low-coverage pipeline
 
 There are three tools you need to download for the low-coverage pipeline:
 
@@ -19,7 +23,7 @@ There are three tools you need to download for the low-coverage pipeline:
 * `GLIMPSE2_phase` - for imputation and phasing
 * `GLIMPSE2_ligate` - for the ligation step
 
-### 1. Download the tools and copy them inside the right folder
+### 2.1. Download the tools and copy them inside the right folder
 
 You can download static binaries of the tools in the [release section on Github](https://github.com/odelaneau/GLIMPSE/releases) or compile your own static binaries. Download the files, remove the `*_static` extension from the filename, and copy each program into the folder `resources/usr/bin/` of the appropriate tool:
 
@@ -53,7 +57,7 @@ mv GLIMPSE2_ligate low-coverage-pipeline/tools/ligate/resources/usr/bin/
 ```
 {% endcode %}
 
-### 2. Create applets
+### 2.2. Create applets
 
 Compile the applets using the dx compile command:
 

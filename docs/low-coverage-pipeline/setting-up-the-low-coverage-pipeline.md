@@ -1,15 +1,19 @@
+---
+description: A guide to upload pipeline-specific data and app compilation
+---
+
 # Setting up the low-coverage pipeline
 
-## Upload project-specific data
+## 1. Upload project-specific data
 
-### 1. Chunk files
+### 1.1. Chunk files
 
 Pre-computed chunks of \~4 cM length can be uploaded using:
 
 <pre><code><strong>dx upload -r data/chunks/glimpse2/* --path ukb-imputation/glimpse2/chunks/
 </strong></code></pre>
 
-### 2. GRCh38 reference genome
+### 1.2. GRCh38 reference genome
 
 The reference genome in b38 is necessary to process CRAM files. We download it from 1000 Genomes EBI ftp server and upload it on the RAP in the expected folder:
 
@@ -21,7 +25,7 @@ dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa --path ukb-imputation/glimp
 dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa.fai --path ukb-imputation/glimpse2/ref_genome/
 ```
 
-#### **2.1 Faster (but manual) alternative to wget / dx upload**
+#### **1.2.1 Faster (but manual) alternative to wget / dx upload**
 
 Downloading data from the EBI ftp server might be slow outside the UK. However, as the UK Biobank RAP is located in London, we can download the file directly on the RAP. To do that you can use the ttyd app for an interactive session, or alternatively use the url\_fetcher app. Here we quickly describe how to use this second option.
 
@@ -31,7 +35,7 @@ Put the URL (indicated above) in the right textbox. No need to fill in the optio
 
 ***
 
-## Compile the low-coverage pipeline
+## 2. Compile the low-coverage pipeline
 
 There are three tools you need to download for the low-coverage pipeline:
 
@@ -39,7 +43,7 @@ There are three tools you need to download for the low-coverage pipeline:
 * `GLIMPSE2_phase` - for imputation and phasing
 * `GLIMPSE2_ligate` - for the ligation step
 
-### 1. Download the tools and copy them inside the right folder
+### 2.1. Download the tools and copy them inside the right folder
 
 You can download static binaries of the tools in the [release section on Github](https://github.com/odelaneau/GLIMPSE/releases) or compile your own static binaries. Download the files, remove the `*_static` extension from the filename, and copy each program into the folder `resources/usr/bin/` of the appropriate tool:
 
@@ -73,7 +77,7 @@ mv GLIMPSE2_ligate low-coverage-pipeline/tools/ligate/resources/usr/bin/
 ```
 {% endcode %}
 
-### 2. Create applets
+### 2.2. Create applets
 
 Compile the applets using the dx compile command:
 
