@@ -190,6 +190,9 @@ mv impute5_v1.2.0/xcftools_static impute5_v1.2.0/xcftools
 #copy the tools to the right folder
 mv impute5_v1.2.0/impute5 snp-array-pipeline/tools/impute5/resources/usr/bin/
 mv impute5_v1.2.0/xcftools snp-array-pipeline/tools/xcftools/resources/usr/bin/
+
+#clean the local folder from temporary files
+rm -rf impute5_v1.2.0/ impute5_v1.2.0.zip __MACOSX/
 </code></pre>
 
 {% code title="SHAPEIT5_phase_common" %}
