@@ -1,5 +1,5 @@
 ---
-description: Pipeline-specific data upload and app compilation
+description: Pipeline-specific data upload and applets compilation
 ---
 
 # Setting up the SNP array pipeline
