@@ -6,7 +6,7 @@ description: Upload files and compile the applets on the RAP
 
 ### UK Biobank RAP
 
-In order to run the tutorials, you need to be a registered UK Biobank researcher and have access to a research project and the research analysis platform. We also require you to set setup the [billing](https://documentation.dnanexus.com/admin/billing-and-account-management) for your project/account.&#x20;
+In order to run the tutorials, you need to be a registered UK Biobank researcher and have access to a research project and the research analysis platform. We also require you to set up the [billing](https://documentation.dnanexus.com/admin/billing-and-account-management) for your project/account.&#x20;
 
 The [DNAnexus SDK (`dx-toolkit`)](broken-reference) is required. Please download, install, and set up the dx-toolkit as instructed by DNAnexus. A quick introduction to the dx toolkit can be found [here](https://documentation.dnanexus.com/getting-started/cli-quickstart).
 
@@ -201,7 +201,7 @@ mv shapeit5_phase_common snp-array-pipeline/tools/shapeit5_ref/resources/usr/bin
 wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_ligate_static
 #change name removing the "_static" extension
 mv GLIMPSE2_ligate_static GLIMPSE2_ligate
-#copy the tool in the right folder
+#copy the tool to the right folder
 mv GLIMPSE2_ligate snp-array-pipeline/tools/ligate/resources/usr/bin/
 ```
 {% endcode %}
