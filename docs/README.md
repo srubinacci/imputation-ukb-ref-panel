@@ -47,7 +47,7 @@ The UK Biobank personal imputation server pipelines are developed by [Simone Rub
 
 #### License <a href="#license" id="license"></a>
 
-The UK Biobank personal imputation server pipelens are distributed with a MIT license.
+The UK Biobank personal imputation server pipelines are distributed with a MIT license.
 
 ***
 
