@@ -47,7 +47,7 @@ Running the pipeline with default parameters, and performing conversion of the r
 
 <strong>for CHR in 20; do #use {1..22} for all autosomes
 </strong>    dx run /ukb-imputation/apps/low-coverage-pipeline \
-        --name "low-coverage-pipeline-chr${CHR}-b00001"  \
+        --name "low-coverage-pipeline-chr${CHR}-conversion-only"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_convert_reference_module=true" \
