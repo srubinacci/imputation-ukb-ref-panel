@@ -105,7 +105,7 @@
       "label": "genetic map path",
       "class": "string",
       "optional": true,
-      "default": "ukb-imputation/impute5/maps/",
+      "default": "ukb-imputation/maps/genetic_maps.b38/",
       "patterns": [
         "*"
       ],
