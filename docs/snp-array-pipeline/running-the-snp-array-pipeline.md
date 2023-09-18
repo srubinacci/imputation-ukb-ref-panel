@@ -4,7 +4,7 @@ description: SNP array imputation using IMPUTE5 and the UK Biobank reference pan
 
 # Running the SNP array pipeline
 
-### Uploading SNP array data data (VCF/BCF)
+### 1. Uploading SNP array data data (VCF/BCF)
 
 As a user of the SNP array pipeline, you are expected to upload your SNP array files. Your files can be located anywhere on the RAP and can be phased or unphased. By convention, your unphased SNP array data should go to the following folder:
 
@@ -13,7 +13,7 @@ As a user of the SNP array pipeline, you are expected to upload your SNP array f
 
 The names used and the structure of this directory are arbitrary and the user can decide how to better organize it. You will need a VCF/BCF file per chromosome (per batch). You can tell the pipeline what VCF/BCF file to use with the `tar_pfx` and `tar_sfx` parameters (see below).
 
-### First-time usage - Create the binary reference panel representation
+### 2. First-time usage - Create the binary reference panel representation
 
 Running the pipeline with default parameters, performing conversion of the reference panel file format and pre-phasing can be done as follows:
 
@@ -39,7 +39,7 @@ You can specify `-i "run_phase_module=true"` and `-i "run_impute_module=true"` t
 
 Please note that we use the option `-i "mount_inputs=true"` in the command above. The reason is that the provided phased VCF files are very large and we want to access only a region within a chromosome. Therefore, downloading the whole file would be wasteful. The option `-i "run_impute_module=true"` allows us to use the `dxfuse`program to stream the file as it was local, therefore efficiently accessing only the region of interest. However, in the rest of the pipeline, we assume the default `-i "mount_inputs=false"` as we handle much smaller files and downloading is usually more efficient.
 
-### Subsequent usages - Run imputation
+### 3. Subsequent usages - Run imputation
 
 For subsequent usages, the creation of the binary reference panel can be skipped as the reference panel is stored in your project directory. You can therefore run:
 
@@ -64,7 +64,7 @@ done
 
 Please note we deactivated the covert reference module. Here we just run pre-phasing and then imputation. As `-i "run_convert_reference_module=false"` is the default, it could be omitted (and the same is true for the convert target module).
 
-### Changing default parameters
+### 4. Changing default parameters
 
 The pipeline has several default parameters that can be changed. To obtain the full list of options, you can run:
 
@@ -95,10 +95,10 @@ for CHR in 20; do #use {1..22} for all autosomes
 done
 ```
 
-### Output and temporary files
+### 5. Output and temporary files
 
 By default, the pipeline keeps the intermediate (chunk-level) imputed files and also provides a chromosome-level file per chromosome. For example, after imputing data for chromosomes 20-22 for a batch of samples (batch\_00000), the pipeline will by default create a subfolder named `batch_00000` in the directory `data/impute5/out/`. The content of this folder will look like this:
 
-![](.gitbook/assets/image.png)
+![](../.gitbook/assets/image.png)
 
 Where the BCF files called "imputed\_chr\*.bcf\[.csi]" are chromosome-level ligated BCF files of the imputed samples of `batch_00000`. The folders named `chr20`, `chr21` and `chr22` contain chunk-level imputed chunks, together with log files and performance files (output of `/bin/time -v`). As these files can be quite large and influence the cost of long-term storage costs, we recommend deleting these temporary folders once verified that the imputation runs successfully.

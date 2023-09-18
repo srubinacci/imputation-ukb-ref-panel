@@ -124,6 +124,6 @@ done
 
 By default, the pipeline keeps the intermediate (chunk-level) imputed files and also provides a chromosome-level file per chromosome. For example, after imputing data for chromosomes 20-22 for a batch of samples (batch\_00000), the pipeline will by default create a subfolder named `batch_00000` in the directory `data/glimpse2/out/`. The content of this folder will look like this:
 
-![](.gitbook/assets/image.png)
+![](../.gitbook/assets/image.png)
 
 Where the BCF files called "imputed\_chr\*.bcf\[.csi]" are chromosome-level ligated BCF files of the imputed samples of `batch_00000`. The folders named `chr20`, `chr21` and `chr22` contain chunk-level imputed chunks, together with log files and performance files (output of `/bin/time -v`). As these files can be quite large and influence the cost of long-term storage costs, we recommend deleting these temporary folders once verified that the imputation runs successfully.
