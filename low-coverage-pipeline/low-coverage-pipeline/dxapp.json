@@ -45,7 +45,7 @@
       "label": "reference panel path in bcf file format",
       "class": "string",
       "optional": true,
-      "default": "Bulk/Whole\ genome\ sequences/SHAPEIT\ Phased\ VCFs/",
+      "default": "Bulk/Whole genome sequences/SHAPEIT Phased VCFs/",
       "patterns": [
         "*"
       ],
