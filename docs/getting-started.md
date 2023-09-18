@@ -6,19 +6,19 @@ description: >-
 
 # Getting started
 
-The primary objective of these tutorials is to demonstrate the process of genotype imputation using the phased UK Biobank resource as a reference panel, thereby enhancing SNP array and low-coverage WGS data. We present two pipeline options that can be readily employed as-is or adapted to meet individual user requirements. These pipelines are designed to function seamlessly within the [UK Biobank research analysis platform](https://ukbiobank.dnanexus.com/l) (RAP). Notably, within the RAP environment, all users share the same resources and tools, though the data is de-identified and accompanied by pseudo-identifiers. This shared reference panel concept enables the utilization of genotype imputation akin to a "personal" imputation server, where the SNP array and low-coverage WGS data remains private on the RAP, while the reference panel is accessible to all approved projects on the platform.
+The primary objective of these tutorials is to demonstrate the process of genotype imputation using the phased UK Biobank resource as a reference panel, thereby enhancing both SNP array and low-coverage WGS data. We present two pipeline options that can be readily employed or adapted to meet individual user requirements. These pipelines are designed to function seamlessly within the [UK Biobank research analysis platform](https://ukbiobank.dnanexus.com/l) (RAP). Notably, all users share the same resources and tools within the RAP environment, though the data is de-identified and accompanied by pseudo-identifiers. This shared reference panel concept enables the utilization of genotype imputation akin to a "personal" imputation server, where the SNP array and low-coverage WGS data remain private on the RAP, while the reference panel is accessible to all approved projects on the platform.
 
-The SHAPEIT5 data can be accessed through the [data field labelled as 20279](https://biobank.ndph.ox.ac.uk/ukb/field.cgi?id=20279), accompanied by a detailed [report](https://biobank.ndph.ox.ac.uk/ukb/refer.cgi?id=1910) outlining data quality control (QC) procedures and quality metrics. We recommend ensuring that your project is updated to the latest version, or alternatively, consider doing so anytime after the September 2023. The phased data can be located in the Bulk folder under the following path:
+The SHAPEIT5 data can be accessed through the [data field labeled 20279](https://biobank.ndph.ox.ac.uk/ukb/field.cgi?id=20279), accompanied by a detailed [report](https://biobank.ndph.ox.ac.uk/ukb/refer.cgi?id=1910) outlining data quality control (QC) procedures and quality metrics. We recommend ensuring that your project is updated to the latest version, or alternatively, consider doing so anytime after September 2023. The phased data can be located in the Bulk folder under the following path:
 
 `/Bulk/Whole genome sequences/SHAPEIT Phased VCFs/`
 
 Please note that the data is organized by chromosome, and for chromosome X, only the non-PAR (non-pseudoautosomal) region has been phased and made available.
 
-The reference panel is only in GRCh38 assembly. GRCh37 version is not available.
+The reference panel is only in the GRCh38 assembly. The GRCh37 version is not available.
 
 ***
 
-### Oveview of the pipelines
+### Overview of the pipelines
 
 In brief, each pipeline comprises a few key steps:
 

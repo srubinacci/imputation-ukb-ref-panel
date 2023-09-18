@@ -6,11 +6,11 @@ description: Upload files and compile the applets on the RAP
 
 ### UK Biobank RAP
 
-In order to run the tutorials, you need to be a registered UK Biobank researcher, have access to a reserach project and the research analysis platform. We also require you to have setup the [billing](https://documentation.dnanexus.com/admin/billing-and-account-management) for your project/account.&#x20;
+In order to run the tutorials, you need to be a registered UK Biobank researcher and have access to a research project and the research analysis platform. We also require you to set setup the [billing](https://documentation.dnanexus.com/admin/billing-and-account-management) for your project/account.&#x20;
 
-The [DNAnexus SDK (`dx-toolkit`)](broken-reference) is required. Please download, install and setup the dx-toolkit as instructred by DNAnexus. A quick introduction on the dx-toolkit can be found [here](https://documentation.dnanexus.com/getting-started/cli-quickstart).
+The [DNAnexus SDK (`dx-toolkit`)](broken-reference) is required. Please download, install, and set up the dx-toolkit as instructed by DNAnexus. A quick introduction to the dx toolkit can be found [here](https://documentation.dnanexus.com/getting-started/cli-quickstart).
 
-We first create a folder called <mark style="color:orange;">`apps`</mark> where all the applets will go. We create this folder on the home directiory. We also create some other helpul directories for the two projects:
+We first create a folder called <mark style="color:orange;">`apps`</mark> where all the applets will go. We created this folder in the home directory. We also created some other helpful directories for the two projects:
 
 <pre class="language-bash"><code class="lang-bash">dx cd
 
@@ -36,7 +36,7 @@ dx mkdir -p ukb-imputation/impute5/out #location of the output imputed data
 
 ### Download the repository
 
-To get started, we first clone Github repository containing the pipelines. To do this run:
+To get started, we first clone the Github repository containing the pipelines. To do this run:
 
 ```bash
 git clone https://github.com/srubinacci/imputation-ukb-ref-panel.git
@@ -48,17 +48,17 @@ We then move to the folder that we just created:
 cd imputation-ukb-ref-panel
 ```
 
-You have two folders here, one for the the low-coverage pipeline and one for the SNP array pipeline. The tutorial always assume that the current working directory is imputation-ukb-ref-panel (please do not cd to another directory).
+You have two folders here, one for the low-coverage pipeline and one for the SNP array pipeline. The tutorial always assumes that the current working directory is imputation-ukb-ref-panel (please do not cd to another directory).
 
 ### Upload the resource data
 
-Imputation pipelines use the same genetic map files. These files are in the on the Github project of the pipeline under the data folder. You will need to upload these files in your project.
+Imputation pipelines use the same genetic map files. These files are in the GitHub project of the pipeline under the data folder. You will need to upload these files to your project.
 
 ```bash
 dx upload -r data/maps --path ukb-imputation/
 ```
 
-This will upload the maps  files in the expected location.
+This will upload the genetic map files to the expected location.
 
 Additional mandatory data can be uploaded using the procedure illustrated in the following boxes.
 
@@ -110,13 +110,13 @@ There are three tools you need to download for the low-coverage pipeline:
 
 #### Download the tools and copy them inside the right folder
 
-You can download static binaries of the tools in the [release section on Github](https://github.com/odelaneau/GLIMPSE/releases) or copile your own static binaries. Download the files, remove the `*_static` extension from the filename and copy each program in the `resources/usr/bin/` of the appropriate tool:
+You can download static binaries of the tools in the [release section on Github](https://github.com/odelaneau/GLIMPSE/releases) or compile your own static binaries. Download the files, remove the `*_static` extension from the filename, and copy each program into the folder `resources/usr/bin/` of the appropriate tool:
 
 <pre class="language-bash" data-title="GLIMPSE2_split_reference"><code class="lang-bash"><strong>#please change the address to the latest release. This is just an example.
 </strong><strong>wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_split_reference_static
 </strong>#change name removing the "_static" extension
 mv GLIMPSE2_split_reference_static GLIMPSE2_split_reference
-#copy the tool in the right folder
+#copy the tool to the right folder
 mv GLIMPSE2_split_reference low-coverage-pipeline/tools/split_reference/resources/usr/bin/
 </code></pre>
 
@@ -126,7 +126,7 @@ mv GLIMPSE2_split_reference low-coverage-pipeline/tools/split_reference/resource
 wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_phase_static
 #change name removing the "_static" extension
 mv GLIMPSE2_phase_static GLIMPSE2_phase
-#copy the tool in the right folder
+#copy the tool to the right folder
 mv GLIMPSE2_phase low-coverage-pipeline/tools/glimpse2_phase/resources/usr/bin/
 ```
 {% endcode %}
@@ -137,7 +137,7 @@ mv GLIMPSE2_phase low-coverage-pipeline/tools/glimpse2_phase/resources/usr/bin/
 wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_ligate_static
 #change name removing the "_static" extension
 mv GLIMPSE2_ligate_static GLIMPSE2_ligate
-#copy the tool in the right folder
+#copy the tool to the right folder
 mv GLIMPSE2_ligate low-coverage-pipeline/tools/ligate/resources/usr/bin/
 ```
 {% endcode %}
@@ -166,20 +166,20 @@ There are three tools you need to download for the low-coverage pipeline:
 
 #### Download the tools and copy them inside the right folder
 
-Several tools are used in this pipeline. Please download each of the tools separately. Keep in mind that IMPUTE5 is free only for academic use, please read the licence before using the software.&#x20;
+Several tools are used in this pipeline. Please download each of the tools separately. Keep in mind that IMPUTE5 is free only for academic use, please read the license before using the software.&#x20;
 
 * Static versions of XCFTOOLS and IMPUTE5 can be downloaded from the [IMPUTE5 website](https://jmarchini.org/software/#impute-5).
-* SHAPEIT5\_phase\_common can be downloaded from the in the [release section on Github.](https://github.com/odelaneau/shapeit5/releases)
-* GLIMPSE2\_ligate can be downloaded from the in the [release section on Github](https://github.com/odelaneau/GLIMPSE/releases).
+* SHAPEIT5\_phase\_common can be downloaded from the [release section on GitHub.](https://github.com/odelaneau/shapeit5/releases)
+* GLIMPSE2\_ligate can be downloaded from the [release section on GitHub](https://github.com/odelaneau/GLIMPSE/releases).
 
 Download the files, remove the `*_static` extension from the filename and copy each program in the `resources/usr/bin/` of the appropriate tool:
 
 <pre class="language-bash" data-title="XCFTOOLS &#x26; IMPUTE5"><code class="lang-bash"><strong>#Download the latest version of the zip from https://jmarchini.org/software/#impute-5 
-</strong>unzip impute5_v1.2.0.zip #change the version name accodingly
+</strong>unzip impute5_v1.2.0.zip #change the version name accordingly
 #change name removing the "_static" extension and versioning
 mv impute5_v1.2.0/impute5_v1.2.0_static impute5_v1.2.0/impute5
 mv impute5_v1.2.0/xcftools_static impute5_v1.2.0/xcftools
-#copy the tools in the right folder
+#copy the tools to the right folder
 mv impute5_v1.2.0/impute5 snp-array-pipeline/tools/impute5/resources/usr/bin/
 mv impute5_v1.2.0/xcftools snp-array-pipeline/tools/xcftools/resources/usr/bin/
 </code></pre>
@@ -190,7 +190,7 @@ mv impute5_v1.2.0/xcftools snp-array-pipeline/tools/xcftools/resources/usr/bin/
 wget https://github.com/odelaneau/shapeit5/releases/download/v5.1.1/phase_common_static
 #change name removing the "_static" extension
 mv phase_common_static shapeit5_phase_common
-#copy the tool in the right folder
+#copy the tool to the right folder
 mv shapeit5_phase_common snp-array-pipeline/tools/shapeit5_ref/resources/usr/bin/
 ```
 {% endcode %}
