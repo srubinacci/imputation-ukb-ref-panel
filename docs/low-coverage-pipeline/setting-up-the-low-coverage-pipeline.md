@@ -51,6 +51,8 @@ You can download static binaries of the tools in the [release section on Github]
 </strong><strong>wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_split_reference_static
 </strong>#change name removing the "_static" extension
 mv GLIMPSE2_split_reference_static GLIMPSE2_split_reference
+#permissions
+chmod 777 GLIMPSE2_split_reference
 #copy the tool to the right folder
 mv GLIMPSE2_split_reference low-coverage-pipeline/tools/split_reference/resources/usr/bin/
 </code></pre>
@@ -61,6 +63,8 @@ mv GLIMPSE2_split_reference low-coverage-pipeline/tools/split_reference/resource
 wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_phase_static
 #change name removing the "_static" extension
 mv GLIMPSE2_phase_static GLIMPSE2_phase
+#permissions
+chmod 777 GLIMPSE2_phase
 #copy the tool to the right folder
 mv GLIMPSE2_phase low-coverage-pipeline/tools/glimpse2_phase/resources/usr/bin/
 ```
@@ -72,6 +76,8 @@ mv GLIMPSE2_phase low-coverage-pipeline/tools/glimpse2_phase/resources/usr/bin/
 wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_ligate_static
 #change name removing the "_static" extension
 mv GLIMPSE2_ligate_static GLIMPSE2_ligate
+#permissions
+chmod 777 GLIMPSE2_ligate
 #copy the tool to the right folder
 mv GLIMPSE2_ligate low-coverage-pipeline/tools/ligate/resources/usr/bin/
 ```
