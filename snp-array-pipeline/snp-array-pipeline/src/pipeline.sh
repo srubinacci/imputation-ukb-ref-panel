@@ -97,7 +97,7 @@ main() {
 				--priority low \
 				--name "convert_ref_chr${chr}_${cnk_num}" \
 				--destination "${ref_xcf_dir}" \
-				-i "inp_bcf=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}${ref_idx}" \
+				-i "inp_bcf=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}" \
 				-i "inp_idx=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}${ref_idx}" \
 				-i "inp_reg=${inp_reg}" \
 				-i "out_pfx=rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}" \
