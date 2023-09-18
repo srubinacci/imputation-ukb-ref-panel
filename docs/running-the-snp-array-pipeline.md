@@ -13,7 +13,7 @@ As a user of the SNP array pipeline you are expected to upload your SNP array fi
 
 The names used and the structure of this directory is arbitrary and the user can decide how to better organise it. You will need a VCF/BCF file per chromosome (per batch). You can tell the pipeline what VCF/BCF file to use using the `tar_pfx` and `tar_sfx` parameters (see below).
 
-### First time usage
+### First time usage - Create the binary reference panel representation
 
 Running the pipeline with default parameters, performing conversion of the reference panel file format and prephasing can be done as follows:
 
@@ -39,7 +39,7 @@ You can specify `-i "run_phase_module=true"` and `-i "run_impute_module=true"` t
 
 Please note that we use the option `-i "mount_inputs=true"` in the command above. The reason is that the provided phased VCF files are very large and we want to access only a region within a chromosome. Therefore, downloading the whole file would be wasteful. The option `-i "run_impute_module=true"` allows is to use the `dxfuse`program to stream the file as it was local, therefore efficiently accessing only the region of interest. However, in the rest of the pipeline we assume the default `-i "mount_inputs=false"` as we handle much smaller files and donwloading is usually more efficient.
 
-### Subsequent usages
+### Subsequent usages - Run imputation
 
 For subsequent usages, the creation of the binary reference panel can be skipped as the reference panel is stored in your project directory. You can therefore run:
 
@@ -53,9 +53,9 @@ for CHR in 20; do #use {1..22} for all autosomes
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_convert_reference_module=false" \
-        -i "run_phase_module=true" \
-        -i "run_convert_target_module=false" \
-        -i "run_impute_module=true" \
+        -i "run_phase_module=true" \ #<-- prephasing is performed
+        -i "run_convert_target_module=false" \ #<-- no conversion if pre-phasing is performed
+        -i "run_impute_module=true" \ #<-- imputation is performed
         -i "batch_id=batch_00001" \
         -y \
         --brief
