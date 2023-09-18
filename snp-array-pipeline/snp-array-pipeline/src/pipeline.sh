@@ -35,8 +35,10 @@ main() {
     echo "Value of out_pth: '$out_pth'"
     echo "Value of ref_pfx: '$ref_pfx'"
     echo "Value of ref_sfx: '$ref_sfx'"
+    echo "Value of ref_idx: '$ref_idx'"
     echo "Value of tar_pfx: '$tar_pfx'"
     echo "Value of tar_sfx: '$tar_sfx'"
+    echo "Value of tar_idx: '$tar_idx'"
     echo "Value of batch_id: '$batch_id'"
     echo "Value of chr: '$chr'"
     echo "Value of phs_arg: '$phs_arg'"
@@ -95,8 +97,8 @@ main() {
 				--priority low \
 				--name "convert_ref_chr${chr}_${cnk_num}" \
 				--destination "${ref_xcf_dir}" \
-				-i "inp_bcf=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}.bcf" \
-				-i "inp_idx=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}.bcf.csi" \
+				-i "inp_bcf=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}${ref_idx}" \
+				-i "inp_idx=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}${ref_idx}" \
 				-i "inp_reg=${inp_reg}" \
 				-i "out_pfx=rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}" \
 				-i "out_fmt=sh" \
@@ -117,8 +119,8 @@ main() {
 				--priority low \
 				--name "convert_tar_chr${chr}_${cnk_num}_${batch_id}" \
 				--destination "${tar_xcf_dir}" \
-	    		-i "inp_bcf=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}.bcf" \
-	    		-i "inp_idx=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}.bcf.csi" \
+	    		-i "inp_bcf=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}" \
+	    		-i "inp_idx=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}${tar_idx}" \
 		    	-i "inp_reg=${inp_reg}" \
 		    	-i "out_pfx=tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}" \
 		    	-i "out_fmt=bh" \
@@ -167,8 +169,8 @@ main() {
 		    		-i "ref_idx=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bcf.csi" \
 		    		-i "ref_bin=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bin" \
 		    		-i "ref_fam=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.fam" \
-		    		-i "tar_bcf=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}.bcf" \
-		    		-i "tar_idx=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}.bcf.csi" \
+		    		-i "tar_bcf=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}" \
+		    		-i "tar_idx=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}${tar_idx}" \
 				-i "map=${map_dir}chr${chr}.b38.gmap.gz" \
 				-i "reg=${inp_reg}" \
 				-i "out_pfx=tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}" \

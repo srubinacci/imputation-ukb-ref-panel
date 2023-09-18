@@ -34,7 +34,7 @@
       "label": "apps path",
       "class": "string",
       "optional": true,
-      "default": "apps/",
+      "default": "ukb-imputation/apps/",
       "patterns": [
         "*"
       ],
@@ -45,7 +45,7 @@
       "label": "reference panel path in bcf file format",
       "class": "string",
       "optional": true,
-      "default": "Phasing/step3_phase_rare/Validation/support/",
+      "default": "Bulk/Whole\ genome\ sequences/SHAPEIT\ Phased\ VCFs/",
       "patterns": [
         "*"
       ],
@@ -56,7 +56,7 @@
       "label": "reference panel path in binary file format",
       "class": "string",
       "optional": true,
-      "default": "data/glimpse2/ref_bin_phased/",
+      "default": "ukb-imputation/glimpse2/ref_bin_phased/",
       "patterns": [
         "*"
       ],
@@ -67,7 +67,7 @@
       "label": "location of the list of BAM files paths",
       "class": "string",
       "optional": true,
-      "default": "data/glimpse2/tar_bam_list/",
+      "default": "ukb-imputation/glimpse2/tar_bam_list/",
       "patterns": [
         "*"
       ],
@@ -78,7 +78,7 @@
       "label": "Reference sequence fasta file",
       "class": "string",
       "optional": true,
-      "default": "data/glimpse2/ref_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa",
+      "default": "ukb-imputation/glimpse2/ref_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa",
       "patterns": [
         "*"
       ],
@@ -89,7 +89,7 @@
       "label": "Fasta index",
       "class": "string",
       "optional": true,
-      "default": "data/glimpse2/ref_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai",
+      "default": "ukb-imputation/glimpse2/ref_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai",
       "patterns": [
         "*"
       ],
@@ -100,7 +100,7 @@
       "label": "genetic map path",
       "class": "string",
       "optional": true,
-      "default": "data/glimpse2/maps/",
+      "default": "ukb-imputation/glimpse2/maps/",
       "patterns": [
         "*"
       ],
@@ -111,7 +111,7 @@
       "label": "imputation chunk file path",
       "class": "string",
       "optional": true,
-      "default": "data/glimpse2/chunks/",
+      "default": "ukb-imputation/glimpse2/chunks/",
       "patterns": [
         "*"
       ],
@@ -122,7 +122,7 @@
       "label": "output directory path",
       "class": "string",
       "optional": true,
-      "default": "/data/glimpse2/out/",
+      "default": "ukb-imputation/glimpse2/out/",
       "patterns": [
         "*"
       ],
@@ -133,7 +133,7 @@
       "label": "reference panel prefix name",
       "class": "string",
       "optional": true,
-      "default": "ukb200k_chr",
+      "default": "ukb20279_c",
       "patterns": [
         "*"
       ],
@@ -144,7 +144,18 @@
       "label": "reference panel suffix name",
       "class": "string",
       "optional": true,
-      "default": ".full.shapeit5_rare.reference_panel",
+      "default": "_b0_v1.vcf.gz",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_idx",
+      "label": "reference panel index extension (.tbi or .csi)",
+      "class": "string",
+      "optional": true,
+      "default": ".tbi",
       "patterns": [
         "*"
       ],
@@ -155,7 +166,7 @@
       "label": "target list prefix name",
       "class": "string",
       "optional": true,
-      "default": "bam_samples_105_",
+      "default": "list_batch_00000_c",
       "patterns": [
         "*"
       ],

@@ -32,6 +32,7 @@ main() {
     echo "Value of out_pth: '$out_pth'"
     echo "Value of ref_pfx: '$ref_pfx'"
     echo "Value of ref_sfx: '$ref_sfx'"
+    echo "Value of ref_idx: '$ref_idx'"
     echo "Value of tar_pfx: '$tar_pfx'"
     echo "Value of tar_sfx: '$tar_sfx'"
     echo "Value of fasta_ref: '$fasta_ref'"
@@ -84,8 +85,8 @@ main() {
 				--priority low \
 				--name "convert_ref_chr${chr}_${cnk_num}" \
 				--destination "${ref_bin_dir}" \
-				-i "inp_bcf=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}.bcf" \
-				-i "inp_idx=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}.bcf.csi" \
+				-i "inp_bcf=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}" \
+				-i "inp_idx=${ref_bcf_dir}${ref_pfx}${chr}${ref_sfx}${ref_idx}" \
 				-i "map=${map_dir}chr${chr}.b38.gmap.gz" \
 				-i "inp_reg=${inp_reg}" \
 				-i "out_reg=${out_reg}" \

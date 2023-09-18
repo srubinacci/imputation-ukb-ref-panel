@@ -50,7 +50,7 @@
       "label": "apps path",
       "class": "string",
       "optional": true,
-      "default": "apps/",
+      "default": "ukb-imputation/apps/",
       "patterns": [
         "*"
       ],
@@ -61,7 +61,7 @@
       "label": "reference panel path in bcf file format",
       "class": "string",
       "optional": true,
-      "default": "Phasing/step3_phase_rare/Validation/support/",
+      "default": "Bulk/Whole\ genome\ sequences/SHAPEIT\ Phased\ VCFs/",
       "patterns": [
         "*"
       ],
@@ -72,7 +72,7 @@
       "label": "reference panel path in xcf file format",
       "class": "string",
       "optional": true,
-      "default": "data/impute5/ref_xcf_phased/",
+      "default": "ukb-imputation/impute5/ref_xcf_phased/",
       "patterns": [
         "*"
       ],
@@ -83,7 +83,7 @@
       "label": "target panel path (unphased data)",
       "class": "string",
       "optional": true,
-      "default": "data/PhasingSNParray/step6_imputation_1k/",
+      "default": "ukb-imputation/impute5/tar_bcf_files/",
       "patterns": [
         "*"
       ],
@@ -91,10 +91,10 @@
     },
     {
       "name": "tar_xcf_pth",
-      "label": "target panel path (pre-hased data)",
+      "label": "target panel path (pre-phased data)",
       "class": "string",
       "optional": true,
-      "default": "data/impute5/tar_xcf_phased/",
+      "default": "ukb-imputation/impute5/tar_xcf_phased/",
       "patterns": [
         "*"
       ],
@@ -105,7 +105,7 @@
       "label": "genetic map path",
       "class": "string",
       "optional": true,
-      "default": "data/impute5/maps/",
+      "default": "ukb-imputation/impute5/maps/",
       "patterns": [
         "*"
       ],
@@ -116,7 +116,7 @@
       "label": "imputation chunk file path",
       "class": "string",
       "optional": true,
-      "default": "data/impute5/chunks/",
+      "default": "ukb-imputation/impute5/chunks/",
       "patterns": [
         "*"
       ],
@@ -127,7 +127,7 @@
       "label": "output directory path",
       "class": "string",
       "optional": true,
-      "default": "/data/impute5/out/",
+      "default": "ukb-imputation/impute5/out/",
       "patterns": [
         "*"
       ],
@@ -138,7 +138,7 @@
       "label": "reference panel prefix name",
       "class": "string",
       "optional": true,
-      "default": "ukb200k_chr",
+      "default": "ukb20279_c",
       "patterns": [
         "*"
       ],
@@ -149,7 +149,18 @@
       "label": "reference panel suffix name",
       "class": "string",
       "optional": true,
-      "default": ".full.shapeit5_rare.reference_panel",
+      "default": "_b0_v1.vcf.gz",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "ref_idx",
+      "label": "reference panel index extension (.tbi or .csi)",
+      "class": "string",
+      "optional": true,
+      "default": ".tbi",
       "patterns": [
         "*"
       ],
@@ -160,7 +171,7 @@
       "label": "target panel prefix name",
       "class": "string",
       "optional": true,
-      "default": "full_c",
+      "default": "array_batch_00000_c",
       "patterns": [
         "*"
       ],
@@ -171,7 +182,18 @@
       "label": "target panel suffix name",
       "class": "string",
       "optional": true,
-      "default": "_b0_v2.b38.sorted.phased_shapeit5_common.renamed.1k_imputation_samples",
+      "default": ".bcf",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "tar_idx",
+      "label": "target panel index extension (.tbi or .csi)",
+      "class": "string",
+      "optional": true,
+      "default": ".csi",
       "patterns": [
         "*"
       ],
