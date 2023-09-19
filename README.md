@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://odelaneau.github.io/GLIMPSE/">
+  <a href="https://srubinacci.gitbook.io/uk-biobank-personal-imputation-server/">
     <img height="150" src="https://github.com/srubinacci/imputation-ukb-ref-panel/assets/17588501/134159d6-2557-424e-a9f8-753698713251">
   </a>
   <h1 align="center">UK Biobank personal imputation server</h1>
