@@ -53,9 +53,9 @@ for CHR in 20; do #use {1..22} for all autosomes
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_convert_reference_module=false" \
-        -i "run_phase_module=true" \ #<-- pre-phasing is performed
-        -i "run_convert_target_module=false" \ #<-- no conversion if pre-phasing is performed
-        -i "run_impute_module=true" \ #<-- imputation is performed
+        -i "run_phase_module=true" \
+        -i "run_convert_target_module=false" \
+        -i "run_impute_module=true" \
         -i "batch_id=batch_00001" \
         -y \
         --brief
@@ -84,12 +84,12 @@ PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
 
 for CHR in 20; do #use {1..22} for all autosomes
     dx run /apps/snp-array-pipeline \
-        --name "snp-array-pipeline-chr${CHR}_b99999"  \ #<---
+        --name "snp-array-pipeline-chr${CHR}_b99999"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_phase_module=true" \
         -i "run_impute_module=true" \
-        -i "batch_id=batch_99999" \ #<---
+        -i "batch_id=batch_99999" \
         -y \
         --brief
 done

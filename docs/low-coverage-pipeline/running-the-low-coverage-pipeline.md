@@ -75,7 +75,7 @@ for CHR in 20; do #use {1..22} for all autosomes
         --name "low-coverage-pipeline-chr${CHR}-b00002"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
-        -i "run_convert_reference_module=false" \ #<---
+        -i "run_convert_reference_module=false" \
         -i "run_impute_module=true" \
         -i "batch_id=batch_00002" \
         -i "tar_pfx=list_batch_00002_c" \
@@ -107,12 +107,12 @@ PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
 
 for CHR in 20; do #use {1..22} for all autosomes
     dx run /ukb-imputation/apps/low-coverage-pipeline \
-        --name "low-coverage-pipeline-chr${CHR}-b99999"  \ #<--- optional
+        --name "low-coverage-pipeline-chr${CHR}-b99999"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
         -i "run_convert_reference_module=false" \
         -i "run_impute_module=true" \
-        -i "batch_id=batch_99999" \ #<---
+        -i "batch_id=batch_99999" \
         -i "tar_pfx=list_batch_99999_c" \
         -i "tar_sfx=.txt" \
         -y \
