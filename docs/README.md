@@ -13,7 +13,7 @@ layout:
     visible: true
 ---
 
-# UK Biobank personal imputation server
+# UK Biobank imputation server
 
 ***
 
@@ -51,9 +51,9 @@ If you use the pipelines in your research work, please cite the following papers
 
 ## About the project <a href="#about-the-project" id="about-the-project"></a>
 
-The UK Biobank personal imputation server pipelines are developed by [Simone Rubinacci](https://srubinacci.github.io/) & [Olivier Delaneau](https://odelaneau.github.io/lap-page/).
+The UK Biobank imputation server pipelines are developed by [Simone Rubinacci](https://srubinacci.github.io/) & [Olivier Delaneau](https://odelaneau.github.io/lap-page/).
 
 #### License <a href="#license" id="license"></a>
 
-The UK Biobank personal imputation server pipelines are distributed with an MIT license.
+The UK Biobank imputation server pipelines are distributed with an MIT license.
 
