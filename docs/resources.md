@@ -20,19 +20,19 @@ The SHAPEIT5 data can be accessed through the [data field labeled 20279](https:/
 
 [SHAPEIT5](https://doi.org/10.1038/s41588-023-01415-w) is a phasing software designed to perform haplotype phasing from large sequencing datasets (whole genome sequencing and whole exome sequencing data). SHAPEIT5 can accurately phase rare variants, even those found in just 1 in 100,000 samples, with switch error rates below 5%. It also enhances genotype imputation accuracy, as shown with the UK Biobank reference panel.
 
-SHAPEIT5 is available [HERE](https://github.com/odelaneau/shapeit5).
+SHAPEIT5 is distributed with an **MIT license** and is available [HERE](https://github.com/odelaneau/shapeit5).
 
 ### GLIMPSE2
 
 [GLIMPSE2](https://doi.org/10.1038/s41588-023-01438-3) is a set of tools for low-coverage whole genome sequencing imputation. GLIMPSE2 is based on the [GLIMPSE model](https://www.nature.com/articles/s41588-020-00756-0) and designed for reference panels containing hundreds of thousands of reference samples, with a special focus on rare variants.
 
-GLIMPSE2 is available [HERE](https://github.com/odelaneau/GLIMPSE).
+GLIMPSE2 is distributed with an **MIT license** and is available [HERE](https://github.com/odelaneau/GLIMPSE).
 
 ### IMPUTE5
 
 [IMPUTE5](https://doi.org/10.1371/journal.pgen.1009049) is a genotype imputation method that can scale to reference panels with millions of samples. It achieves fast, accurate, and memory-efficient imputation by selecting haplotypes using the Positional Burrows-Wheeler Transform (PBWT). The method then uses the selected haplotypes as conditioning states within the IMPUTE model.
 
-IMPUTE5 is available [HERE](https://jmarchini.org/software/#impute-5).
+IMPUTE5 is free only for academic use. Please read the **commercial license** before downloading the software. IMPUTE5 can be downloaded [HERE](https://jmarchini.org/software/#impute-5).
 
 ***
 
