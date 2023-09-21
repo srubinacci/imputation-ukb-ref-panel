@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://srubinacci.gitbook.io/uk-biobank-imputation-server/">
-    <img height="150" src="https://github.com/srubinacci/imputation-ukb-ref-panel/assets/17588501/134159d6-2557-424e-a9f8-753698713251">
+    <img height="150" src="https://github.com/srubinacci/imputation-ukb-ref-panel/assets/17588501/0d07b85e-961c-479f-bce5-0f89ba223afe">
   </a>
   <h1 align="center">UK Biobank imputation server</h1>
 </p>
