@@ -1,8 +1,8 @@
 <p align="center">
-  <a href="https://srubinacci.gitbook.io/uk-biobank-imputation-server/">
-    <img height="150" src="https://github.com/srubinacci/imputation-ukb-ref-panel/assets/17588501/0d07b85e-961c-479f-bce5-0f89ba223afe">
+  <a href="https://srubinacci.gitbook.io/uk-biobank-imputation-pipelines/">
+    <img height="150" src="https://github.com/srubinacci/imputation-ukb-ref-panel/assets/17588501/902fcd67-3176-4152-bf24-579ad3127a43">
   </a>
-  <h1 align="center">UK Biobank imputation server</h1>
+  <h1 align="center">UK Biobank imputation pipelines</h1>
 </p>
 
 ## About
@@ -18,7 +18,7 @@ Our pipelines can take input from a multi-sample VCF/BCF file with SNP array gen
 
 Tutorials on how to use the pipelines can be found at:
 
-https://srubinacci.gitbook.io/uk-biobank-imputation-server/
+https://srubinacci.gitbook.io/uk-biobank-imputation-pipelines/
 
 
 ## Citation
@@ -39,8 +39,8 @@ If you use the pipelines in your research work, please cite the following papers
 
 
 ## About the project
-The UK Biobank imputation server pipelines are developed by Simone Rubinacci & Olivier Delaneau.
+The UK Biobank imputation pipelines are developed by Simone Rubinacci & Olivier Delaneau.
 
 
 ## License
-The UK Biobank imputation server pipelines are distributed with an MIT license.
+The UK Biobank imputation r pipelines are distributed with an MIT license.
