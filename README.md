@@ -43,4 +43,4 @@ The UK Biobank imputation pipelines are developed by Simone Rubinacci & Olivier 
 
 
 ## License
-The UK Biobank imputation r pipelines are distributed with an MIT license.
+The UK Biobank imputation pipelines are distributed with an MIT license.
