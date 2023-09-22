@@ -1,6 +1,6 @@
 # Table of contents
 
-* [UK Biobank imputation server](README.md)
+* [UK Biobank imputation pipelines](README.md)
 * [Resources](resources.md)
 * [Getting started](getting-started.md)
 * [Setting up the project](setting-up-the-project.md)
