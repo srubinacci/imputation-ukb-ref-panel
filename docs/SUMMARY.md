@@ -10,4 +10,5 @@
 * [SNP array pipeline](snp-array-pipeline/README.md)
   * [Setting up the SNP array pipeline](snp-array-pipeline/setting-up-the-snp-array-pipeline.md)
   * [Running the SNP array pipeline](snp-array-pipeline/running-the-snp-array-pipeline.md)
+* [Troubleshooting](troubleshooting.md)
 * [Pipelines on Github](https://github.com/srubinacci/imputation-ukb-ref-panel)
