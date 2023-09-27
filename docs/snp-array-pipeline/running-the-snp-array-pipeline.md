@@ -21,7 +21,7 @@ Running the pipeline with default parameters, performing conversion of the refer
 </strong>PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
 
 <strong>for CHR in 20; do #use {1..22} for all autosomes
-</strong>    dx run ukb-imputation/apps/snp-array-pipeline \
+</strong>    dx run /ukb-imputation/apps/snp-array-pipeline \
         --name "snp-array-pipeline-chr${CHR}-conversion-only"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
@@ -48,7 +48,7 @@ For subsequent usages, the creation of the binary reference panel can be skipped
 PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
 
 for CHR in 20; do #use {1..22} for all autosomes
-    dx run ukb-imputation/apps/snp-array-pipeline \
+    dx run /ukb-imputation/apps/snp-array-pipeline \
         --name "snp-array-pipeline-chr${CHR}-b00001"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
@@ -69,7 +69,7 @@ Please note we deactivated the covert reference module. Here we just run pre-pha
 The pipeline has several default parameters that can be changed. To obtain the full list of options, you can run:
 
 ```bash
-dx describe ukb-imputation/apps/snp-array-pipeline
+dx describe /ukb-imputation/apps/snp-array-pipeline
 ```
 
 The parameters are summarised below:
@@ -83,7 +83,7 @@ Each of these parameters can be changed. To specify a different value for one of
 PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
 
 for CHR in 20; do #use {1..22} for all autosomes
-    dx run /apps/snp-array-pipeline \
+    dx run /ukb-imputation/apps/snp-array-pipeline \
         --name "snp-array-pipeline-chr${CHR}_b99999"  \
         -i "project=${PROJ}" \
         -i "chr=${CHR}" \
