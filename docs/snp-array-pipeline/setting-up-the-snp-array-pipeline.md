@@ -36,66 +36,70 @@ Several tools are used in this pipeline. Please download each of the tools separ
 Download the files, remove the `*_static` extension from the filename and copy each program in the `resources/usr/bin/` of the appropriate tool:
 
 <pre class="language-bash" data-title="IMPUTE5 v1.2"><code class="lang-bash"><strong>#Download the latest version of the zip from https://jmarchini.org/software/#impute-5 
-</strong>unzip impute5_v1.2.0.zip #change the version name accodingly
-#change name removing the "_static" extension and versioning
-mv impute5_v1.2.0/impute5_v1.2.0_static impute5_v1.2.0/impute5
+</strong>unzip impute5_v1.2.0.zip &#x26;&#x26; #change the version name accordingly
+#change name, by removing the "_static" extension and versioning
+mv impute5_v1.2.0/impute5_v1.2.0_static impute5_v1.2.0/impute5 &#x26;&#x26;
 #permissions
-chmod 777 impute5_v1.2.0/impute5
-#copy the tools in the right folder
-mv impute5_v1.2.0/impute5 snp-array-pipeline/tools/impute5/resources/usr/bin/
+chmod 777 impute5_v1.2.0/impute5 &#x26;&#x26;
+#copy the tools to the right folder
+mv impute5_v1.2.0/impute5 snp-array-pipeline/tools/impute5/resources/usr/bin/ &#x26;&#x26;
 #cleanup local folder from temporary files
-rm -rf impute5_v1.2.0/ impute5_v1.2.0.zip __MACOSX/
+rm -rf impute5_v1.2.0/ impute5_v1.2.0.zip __MACOSX/ &#x26;&#x26;
+echo "Files successfully copied"
 </code></pre>
 
 {% code title="XCFTOOLS" %}
 ```bash
 #please change the address to the latest release. This is just an example.
-wget https://github.com/odelaneau/xcftools/releases/download/v0.1.0/xcftools_static
-#change name removing the "_static" extension
-mv xcftools_static xcftools
+wget https://github.com/odelaneau/xcftools/releases/download/v0.1.1/xcftools_static &&
+#change name. by removing the "_static" extension
+mv xcftools_static xcftools &&
 #permissions
-chmod 777 xcftools
-#copy the tools in the right folder
-mv xcftools snp-array-pipeline/tools/xcftools/resources/usr/bin/
+chmod 777 xcftools &&
+#copy the tools to the right folder
+cp xcftools snp-array-pipeline/tools/xcftools_concat/resources/usr/bin/ &&
+cp xcftools snp-array-pipeline/tools/xcftools_view/resources/usr/bin/ &&
+rm -f xcftools &&
+echo "Files successfully copied"
 ```
 {% endcode %}
 
 {% code title="SHAPEIT5_phase_common" %}
 ```bash
 #please change the address to the latest release. This is just an example.
-wget https://github.com/odelaneau/shapeit5/releases/download/v5.1.1/phase_common_static
-#change name removing the "_static" extension
-mv phase_common_static shapeit5_phase_common
+wget https://github.com/odelaneau/shapeit5/releases/download/v5.1.1/phase_common_static &&
+#change name, by removing the "_static" extension
+mv phase_common_static shapeit5_phase_common &&
 #permissions
-chmod 777 shapeit5_phase_common
-#copy the tool in the right folder
-mv shapeit5_phase_common snp-array-pipeline/tools/shapeit5_ref/resources/usr/bin/
+chmod 777 shapeit5_phase_common &&
+#copy the tool to the right folder
+mv shapeit5_phase_common snp-array-pipeline/tools/shapeit5_ref/resources/usr/bin/ &&
+echo "Files successfully copied"
 ```
 {% endcode %}
 
-{% code title="GLIMPSE2_ligate" %}
-```bash
-#please change the address to the latest release. This is just an example.
-wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_ligate_static
-#change name removing the "_static" extension
-mv GLIMPSE2_ligate_static GLIMPSE2_ligate
+<pre class="language-bash" data-title="GLIMPSE2_ligate"><code class="lang-bash"><strong>#please change the address to the latest release. This is just an example.
+</strong>wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_ligate_static &#x26;&#x26;
+#change name, by removing the "_static" extension
+mv GLIMPSE2_ligate_static GLIMPSE2_ligate &#x26;&#x26;
 #permissions
-chmod 777 GLIMPSE2_ligate
-#copy the tool in the right folder
-mv GLIMPSE2_ligate snp-array-pipeline/tools/ligate/resources/usr/bin/
-```
-{% endcode %}
+chmod 777 GLIMPSE2_ligate &#x26;&#x26;
+#copy the tool to the right folder
+mv GLIMPSE2_ligate snp-array-pipeline/tools/ligate/resources/usr/bin/ &#x26;&#x26;
+echo "Files successfully copied"
+</code></pre>
 
 ### **2.2. Create applets**
 
 Compile the applets using the dx compile command:
 
 ```
-dx build snp-array-pipeline/tools/impute5 -d ukb-imputation/apps/ -f 
-dx build snp-array-pipeline/tools/shapeit5_ref -d ukb-imputation/apps/ -f 
-dx build snp-array-pipeline/tools/xcftools -d ukb-imputation/apps/ -f 
-dx build snp-array-pipeline/tools/ligate -d ukb-imputation/apps/ -f 
-dx build snp-array-pipeline/snp-array-pipeline -d ukb-imputation/apps/ -f 
+dx build snp-array-pipeline/tools/impute5 -d ukb-imputation/apps/ -f &&
+dx build snp-array-pipeline/tools/shapeit5_ref -d ukb-imputation/apps/ -f &&
+dx build snp-array-pipeline/tools/xcftools_view -d ukb-imputation/apps/ -f &&
+dx build snp-array-pipeline/tools/xcftools_concat -d ukb-imputation/apps/ -f &&
+dx build snp-array-pipeline/snp-array-pipeline -d ukb-imputation/apps/ -f
+echo "Applets successfully uploaded"
 ```
 
 You should now see the applets appearing on the RAP in the apps folder.
