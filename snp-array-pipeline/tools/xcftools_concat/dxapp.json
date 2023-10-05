@@ -1,0 +1,107 @@
+{
+  "name": "xcftools_concat",
+  "title": "xcftools_concat",
+  "summary": "concat or ligate multiple XCF files into chromosome-wide files",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+  "inputSpec": [
+    {
+      "name": "inp_pfx",
+      "label": "prefix for input files",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "out_pfx",
+      "label": "prefix for output files",
+      "class": "string",
+      "optional": false,
+      "help": ""
+    },
+    {
+      "name": "num_thr",
+      "label": "number of threads",
+      "class": "int",
+      "optional": true,
+      "default" : 1,
+      "help": ""
+    },
+    {
+      "name": "naive",
+      "label": "Wheather to run concat naive (for disjoint chunks - no buffer variants in common). Default set to false. By default the program is run in ligate mode (with shared buffer to ligate phased chunks).",
+      "class": "boolean",
+      "optional": true,
+      "default" : false,
+      "help": ""
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "out_bcf",
+      "label": "output bcf file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_idx",
+      "label": "output index file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_bin",
+      "label": "output bin file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_fam",
+      "label": "output fam file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "out_log",
+      "label": "output log file",
+      "class": "file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 24
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/xcftools_concat.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+  },
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_v2_x4"
+        }
+      }
+    }
+  }
+}

@@ -66,12 +66,12 @@ main() {
     	ln -s ${tar_fam_path} ${tar_fam_name}
     fi
     
-	if [ -n "$map" ]; then
+    if [ -n "$map" ]; then
        	ln -s ${map_path} ${map_name}
     	map_opt="--m ${map_name}"
     fi
     
-    /usr/bin/time -p -o ${out_pfx}.time impute5 --h ${ref_bcf_name} --g ${tar_bcf_name} ${map_opt} --buffer-region ${buf_reg} --r ${imp_reg} --o ${out_pfx}.bcf --l ${out_pfx}.log --threads ${num_thr} --out-buffer ${imp_args}
+    /usr/bin/time -p -o ${out_pfx}.time impute5 --h ${ref_bcf_name} --g ${tar_bcf_name} ${map_opt} --buffer-region ${buf_reg} --r ${imp_reg} --o ${out_pfx}.bcf --l ${out_pfx}.log --threads ${num_thr} ${imp_args}
 
     out_bcf=$(dx upload ${out_pfx}.bcf --brief)
     out_idx=$(dx upload ${out_pfx}.bcf.csi --brief)
