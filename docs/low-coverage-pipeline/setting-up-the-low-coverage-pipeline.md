@@ -21,7 +21,7 @@ The reference genome in b38 is necessary to process CRAM files. We download it f
 wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa &&
 wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai &&
 dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa --path ukb-imputation/glimpse2/ref_genome/ &&
-dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa.fai --path ukb-imputation/glimpse2/ref_genome/
+dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa.fai --path ukb-imputation/glimpse2/ref_genome/ &&
 echo "Reference genome successfully uploaded"
 ```
 
