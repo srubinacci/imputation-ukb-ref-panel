@@ -18,11 +18,11 @@ Pre-computed chunks of \~4 cM length can be uploaded using:
 The reference genome in b38 is necessary to process CRAM files. We download it from 1000 Genomes EBI ftp server and upload it on the RAP in the expected folder:
 
 ```bash
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai
-
-dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa --path ukb-imputation/glimpse2/ref_genome/
+wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa &&
+wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai &&
+dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa --path ukb-imputation/glimpse2/ref_genome/ &&
 dx upload GRCh38_full_analysis_set_plus_decoy_hla.fa.fai --path ukb-imputation/glimpse2/ref_genome/
+echo "Reference genome successfully uploaded"
 ```
 
 #### **1.2.1 Faster (but manual) alternative to wget / dx upload**
@@ -48,38 +48,41 @@ There are three tools you need to download for the low-coverage pipeline:
 You can download static binaries of the tools in the [release section on Github](https://github.com/odelaneau/GLIMPSE/releases) or compile your own static binaries. Download the files, remove the `*_static` extension from the filename, and copy each program into the folder `resources/usr/bin/` of the appropriate tool:
 
 <pre class="language-bash" data-title="GLIMPSE2_split_reference"><code class="lang-bash"><strong>#please change the address to the latest release. This is just an example.
-</strong><strong>wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_split_reference_static
+</strong><strong>wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_split_reference_static &#x26;&#x26;
 </strong>#change name removing the "_static" extension
-mv GLIMPSE2_split_reference_static GLIMPSE2_split_reference
+mv GLIMPSE2_split_reference_static GLIMPSE2_split_reference &#x26;&#x26;
 #permissions
-chmod 777 GLIMPSE2_split_reference
+chmod 777 GLIMPSE2_split_reference &#x26;&#x26;
 #copy the tool to the right folder
-mv GLIMPSE2_split_reference low-coverage-pipeline/tools/split_reference/resources/usr/bin/
+mv GLIMPSE2_split_reference low-coverage-pipeline/tools/glimpse2_split_reference/resources/usr/bin/ &#x26;&#x26;
+echo "Files successfully copied"
 </code></pre>
 
 {% code title="GLIMPSE2_phase" %}
 ```bash
 #please change the address to the latest release. This is just an example.
-wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_phase_static
+wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_phase_static &&
 #change name removing the "_static" extension
-mv GLIMPSE2_phase_static GLIMPSE2_phase
+mv GLIMPSE2_phase_static GLIMPSE2_phase &&
 #permissions
-chmod 777 GLIMPSE2_phase
+chmod 777 GLIMPSE2_phase &&
 #copy the tool to the right folder
-mv GLIMPSE2_phase low-coverage-pipeline/tools/glimpse2_phase/resources/usr/bin/
+mv GLIMPSE2_phase low-coverage-pipeline/tools/glimpse2_phase/resources/usr/bin/ &&
+echo "Files successfully copied"
 ```
 {% endcode %}
 
 {% code title="GLIMPSE2_ligate" %}
 ```bash
 #please change the address to the latest release. This is just an example.
-wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_ligate_static
+wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_ligate_static &&
 #change name removing the "_static" extension
-mv GLIMPSE2_ligate_static GLIMPSE2_ligate
+mv GLIMPSE2_ligate_static GLIMPSE2_ligate &&
 #permissions
-chmod 777 GLIMPSE2_ligate
+chmod 777 GLIMPSE2_ligate &&
 #copy the tool to the right folder
-mv GLIMPSE2_ligate low-coverage-pipeline/tools/ligate/resources/usr/bin/
+mv GLIMPSE2_ligate low-coverage-pipeline/tools/glimpse2_ligate/resources/usr/bin/ &&
+echo "Files successfully copied"
 ```
 {% endcode %}
 
@@ -87,12 +90,15 @@ mv GLIMPSE2_ligate low-coverage-pipeline/tools/ligate/resources/usr/bin/
 
 Compile the applets using the dx compile command:
 
+{% code title="Build applets on the RAP" %}
 ```bash
-dx build low-coverage-pipeline/tools/split_reference -d ukb-imputation/apps/ -f 
-dx build low-coverage-pipeline/tools/glimpse2_phase -d ukb-imputation/apps/ -f 
-dx build low-coverage-pipeline/tools/ligate -d ukb-imputation/apps/ -f 
-dx build low-coverage-pipeline/low-coverage-pipeline -d ukb-imputation/apps/ -f 
+dx build low-coverage-pipeline/tools/glimpse2_split_reference -d ukb-imputation/apps/ -f  &&
+dx build low-coverage-pipeline/tools/glimpse2_phase -d ukb-imputation/apps/ -f &&
+dx build low-coverage-pipeline/tools/glimpse2_ligate -d ukb-imputation/apps/ -f &&
+dx build low-coverage-pipeline/low-coverage-pipeline -d ukb-imputation/apps/ -f &&
+echo "Applets successfully uploaded"
 ```
+{% endcode %}
 
-You should now see the applets appearing on the RAP in the apps folder. You are all set and can run the pipeline!
+You should now see the applets appearing on the RAP in the apps folder. Dx build will inform you if you are overwriting previously compiled applets with the same name. The -f option above will overwrite any existing applet file.
 

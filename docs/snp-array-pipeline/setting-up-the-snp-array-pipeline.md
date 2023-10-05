@@ -73,7 +73,7 @@ mv phase_common_static shapeit5_phase_common &&
 #permissions
 chmod 777 shapeit5_phase_common &&
 #copy the tool to the right folder
-mv shapeit5_phase_common snp-array-pipeline/tools/shapeit5_ref/resources/usr/bin/ &&
+mv shapeit5_phase_common snp-array-pipeline/tools/shapeit5_phase_common/resources/usr/bin/ &&
 echo "Files successfully copied"
 ```
 {% endcode %}
@@ -93,14 +93,16 @@ echo "Files successfully copied"
 
 Compile the applets using the dx compile command:
 
-```
+{% code title="Build applets on the RAP" %}
+```bash
 dx build snp-array-pipeline/tools/impute5 -d ukb-imputation/apps/ -f &&
-dx build snp-array-pipeline/tools/shapeit5_ref -d ukb-imputation/apps/ -f &&
+dx build snp-array-pipeline/tools/shapeit5_phase_common -d ukb-imputation/apps/ -f &&
 dx build snp-array-pipeline/tools/xcftools_view -d ukb-imputation/apps/ -f &&
 dx build snp-array-pipeline/tools/xcftools_concat -d ukb-imputation/apps/ -f &&
-dx build snp-array-pipeline/snp-array-pipeline -d ukb-imputation/apps/ -f
+dx build snp-array-pipeline/snp-array-pipeline -d ukb-imputation/apps/ -f &&
 echo "Applets successfully uploaded"
 ```
+{% endcode %}
 
-You should now see the applets appearing on the RAP in the apps folder.
+You should now see the applets appearing on the RAP in the apps folder. Dx build will inform you if you are overwriting previously compiled applets with the same name. The -f option above will overwrite any existing applet file.
 
