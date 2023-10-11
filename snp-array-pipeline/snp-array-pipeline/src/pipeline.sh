@@ -45,10 +45,12 @@ main() {
     echo "Value of imp_arg: '$imp_arg'"
     echo "Value of mount_inputs: '$mount_inputs'"
     echo "Value of conversion_instance_type: '$conversion_instance_type'"
+    echo "Value of ligation_instance_type: '$ligation_instance_type'"
     echo "Value of phasing_instance_type: '$phasing_instance_type'"
     echo "Value of imputation_instance_type: '$imputation_instance_type'"
     
-    num_thr_xcf=$(echo ${conversion_instance_type} | sed -n 's/.*_x\([0-9]*\).*/\1/p')    
+    num_thr_xcf=$(echo ${conversion_instance_type} | sed -n 's/.*_x\([0-9]*\).*/\1/p')
+    num_thr_lig=1    
     num_thr_phs=$(echo ${phasing_instance_type} | sed -n 's/.*_x\([0-9]*\).*/\1/p')    
     num_thr_imp=$(echo ${imputation_instance_type} | sed -n 's/.*_x\([0-9]*\).*/\1/p')    
     
@@ -87,7 +89,7 @@ main() {
 				
 			if [ "$run_convert_reference_module" == "true" ]; then
 				#	1. create ref panel in xcf
-				dx run ${app_dir}xcftools \
+				dx run ${app_dir}xcftools_view \
 				-y \
 				--wait \
 				--brief \
@@ -109,7 +111,7 @@ main() {
 			
 			if [ "$run_convert_target_module" == "true" ]; then
 				#	2.A convert phased target to xcf - no prephase
-				dx run ${app_dir}xcftools \
+				dx run ${app_dir}xcftools_view \
 				-y \
 				--wait \
 				--brief \
@@ -119,13 +121,13 @@ main() {
 				--priority low \
 				--name "convert_tar_chr${chr}_${cnk_num}_${batch_id}" \
 				--destination "${tar_xcf_dir}" \
-	    		-i "inp_bcf=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}" \
-	    		-i "inp_idx=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}${tar_idx}" \
-		    	-i "inp_reg=${inp_reg}" \
-		    	-i "out_pfx=tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}" \
-		    	-i "out_fmt=bh" \
-		    	-i "num_thr=${num_thr_xcf}" \
-		    	-i "mount_inputs=${mount_inputs}" &
+	    			-i "inp_bcf=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}" \
+		    		-i "inp_idx=${tar_bcf_dir}${tar_pfx}${chr}${tar_sfx}${tar_idx}" \
+			    	-i "inp_reg=${inp_reg}" \
+			    	-i "out_pfx=tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}" \
+			    	-i "out_fmt=bh" \
+			    	-i "num_thr=${num_thr_xcf}" \
+			    	-i "mount_inputs=${mount_inputs}" &
 		    fi
 	    done < chunks.txt
 	    
@@ -141,6 +143,9 @@ main() {
 		
 		echo -e "\t* Launching pre-phasing jobs..."
 		
+		dep_str=""
+		job_id=""
+		
 		while read line; do
 			inp_reg=$(echo $line | awk '{ print $3; }')
 			inp_reg_srt=$(echo ${inp_reg} | cut -d":" -f 2 | cut -d"-" -f1)
@@ -155,16 +160,16 @@ main() {
 			
 			project=$(echo $out_dir | cut -d":" -f1)
 		
-			dx run ${app_dir}shapeit5_ref \
+			job_id=$( \
+				dx run ${app_dir}shapeit5_phase_common \
 				-y \
-				--wait \
 		    		--brief \
+		    		--detach \
 		    		--ignore-reuse \
 		    		--instance-type="${phasing_instance_type}" \
-		    		--detach \
 		    		--priority="low" \
 		    		--name="prephase_tar_chr${chr}_${cnk_num}_${batch_id}" \
-		    		--destination="${tar_xcf_dir}" \
+		    		--destination="${tar_xcf_dir}chunks/" \
 		    		-i "ref_bcf=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bcf" \
 		    		-i "ref_idx=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bcf.csi" \
 		    		-i "ref_bin=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bin" \
@@ -175,8 +180,28 @@ main() {
 				-i "reg=${inp_reg}" \
 				-i "out_pfx=tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}" \
 				-i "num_thr=${num_thr_phs}" \
-		    		-i "mount_inputs=${mount_inputs}" &
+		    		-i "mount_inputs=${mount_inputs}" )	    		
+	    	
+		    	if [ ! -z "$job_id" ]; then
+				dep_str+="-d ${job_id} "
+			fi
 		done < chunks.txt 
+		
+		dx run ${app_dir}xcftools_concat \
+			-y \
+			--brief \
+			--wait \
+			--detach \
+			--ignore-reuse \
+			--priority="low" \
+			--instance-type="${ligation_instance_type}" \
+			--name "ligate_phased_snp_array_chr${chr}_${batch_id}" \
+			--destination "${tar_xcf_dir}" \
+			-i "inp_pfx=${tar_xcf_pth}${batch_id}/chr${chr}/chunks/tar_phased_chr${chr}" \
+			-i "out_pfx=tar_phased_chr${chr}" \
+			-i "num_thr=${num_thr_lig}" \
+			-i "naive=false" \
+			${dep_str} &
 		
 		echo -e "\t* Prephasing jobs launched successfully."
 	fi
@@ -223,10 +248,10 @@ main() {
 				-i "ref_idx=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bcf.csi" \
 				-i "ref_bin=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bin" \
 				-i "ref_fam=${ref_xcf_dir}rp_chr${chr}_${inp_reg_srt}_${inp_reg_end}.fam" \
-				-i "tar_bcf=${tar_xcf_dir}tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bcf" \
-				-i "tar_idx=${tar_xcf_dir}tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bcf.csi" \
-				-i "tar_bin=${tar_xcf_dir}tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}.bin" \
-				-i "tar_fam=${tar_xcf_dir}tar_phased_chr${chr}_${inp_reg_srt}_${inp_reg_end}.fam" \
+				-i "tar_bcf=${tar_xcf_dir}tar_phased_chr${chr}.bcf" \
+				-i "tar_idx=${tar_xcf_dir}tar_phased_chr${chr}.bcf.csi" \
+				-i "tar_bin=${tar_xcf_dir}tar_phased_chr${chr}.bin" \
+				-i "tar_fam=${tar_xcf_dir}tar_phased_chr${chr}.fam" \
 				-i "map=${map_dir}chr${chr}.b38.gmap.gz" \
 				-i "buf_reg=${inp_reg}" \
 				-i "imp_reg=${out_reg}" \
@@ -239,34 +264,35 @@ main() {
 				dep_str+="-d ${job_id} "
 			fi	
 		done < chunks.txt 
-		
-		dx run ${app_dir}ligate \
+
+		#3.1 ligate
+#		dx run ${app_dir}ligate \
+#			-y \
+#			--brief \
+#			--detach \
+#			--ignore-reuse \
+#			--priority="low" \
+#			--instance-type="${imputation_instance_type}" \
+#			--name "ligate_chr${chr}_${batch_id}" \
+#			--destination "${cnc_dir}" \
+#			-i "inp_pfx=${out_pth}${batch_id}/chr${chr}/imputed_chr${chr}" \
+#			-i "out_pfx=imputed_chr${chr}" \
+#			-i "num_thr=${num_thr_imp}" \
+#			-i "naive=true" \
+#			${dep_str}
+				
+		#3.2 concat
+		dx run swiss-army-knife \
 			-y \
 			--brief \
 			--detach \
 			--ignore-reuse \
 			--priority="low" \
-			--instance-type="${imputation_instance_type}" \
-			--name "ligate_chr${chr}_${batch_id}" \
+			--instance-type="${ligation_instance_type}" \
+			--name "concat_imputed_chr${chr}_${batch_id}" \
 			--destination "${cnc_dir}" \
-			-i "inp_pfx=${out_pth}${batch_id}/chr${chr}/imputed_chr${chr}" \
-			-i "out_pfx=imputed_chr${chr}" \
-			-i "num_thr=${num_thr_imp}" \
+			-i "cmd=ls -1v /mnt/project/${out_pth}${batch_id}/chr${chr}/imputed_chr${chr}*.bcf > list.txt && bcftools concat -n -f list.txt --threads ${num_thr_lig} -Ob -o imputed_chr${chr}.bcf && bcftools index -f imputed_chr${chr}.bcf --threads ${num_thr_lig} && rm -f list.txt" \
 			${dep_str}
-				
-		#3.2 concat
-		#dx run swiss-army-knife \
-		#	-y \
-		#	--brief \
-		#	--detach \
-		#	--ignore-reuse \
-		#	--priority="low" \
-		#	--instance-type="${imputation_instance_type}" \
-		#	--name "ligate_module_chr${chr}_${batch_id}" \
-		#	--destination "${cnc_dir}" \
-		#	-i "in=${app_dir}"
-		#	-i "cmd=ls -1v /mnt/project/${out_pth}${batch_id}/chr${chr}/imputed_chr${chr}*.bcf > list.txt && GLIMPSE2_ligate -n -f list.txt --threads ${num_thr_imp} -Ob -o imputed_chr${chr}.bcf && bcftools index -f imputed_chr${chr}.bcf --threads ${num_thr_imp} && rm -f list.txt" \
-		#	${dep_str}
 			
 		echo -e "\t* Imputation jobs launched successfully."
 	fi		

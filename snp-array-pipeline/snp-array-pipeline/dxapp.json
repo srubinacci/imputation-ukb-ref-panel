@@ -253,6 +253,17 @@
       "help": ""
     },
     {
+      "name": "ligation_instance_type",
+      "label": "instance type used for ligation / concatenation of files",
+      "class": "string",
+      "optional": true,
+      "default": "mem1_ssd1_v2_x2",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
       "name": "phasing_instance_type",
       "label": "instance type used for pre-phasing",
       "class": "string",

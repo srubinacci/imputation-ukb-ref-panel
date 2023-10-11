@@ -76,7 +76,7 @@ main() {
 				
 			if [ "$run_convert_reference_module" == "true" ]; then
 				#	1. create ref panel in bin
-				dx run ${app_dir}split_reference \
+				dx run ${app_dir}glimpse2_split_reference \
 				-y \
 				--wait \
 				--brief \
@@ -152,7 +152,7 @@ main() {
 			fi	
 		done < chunks.txt 
 		
-		dx run ${app_dir}ligate \
+		dx run ${app_dir}glimpse2_ligate \
 			-y \
 			--brief \
 			--detach \
@@ -165,17 +165,6 @@ main() {
 			-i "out_pfx=imputed_chr${chr}" \
 			-i "num_thr=${num_thr_imp}" \
 			${dep_str}
-		##3.2 concat
-		#dx run swiss-army-knife \
-		#	-y \
-		#	--brief \
-		#	--detach \
-		#	--priority="low" \
-		#	--instance-type="${imputation_instance_type}" \
-		#	--name "concat_module_chr${chr}_${batch_id}" \
-		#	--destination "${cnc_dir}" \
-		#	-i "cmd=ls -1v /mnt/project/${out_pth}${batch_id}/chr${chr}/imputed_chr${chr}*.bcf > list.txt && bcftools concat -n -f list.txt --threads ${num_thr_imp} -Ob -o imputed_chr${chr}.bcf && bcftools index -f imputed_chr${chr}.bcf --threads ${num_thr_imp} && rm -f list.txt" \
-		#	${dep_str}
 			
 		echo -e "\t* Imputation jobs launched successfully."
 	fi		
