@@ -19,10 +19,9 @@ Pre-computed chunks of \~40 cM length can be uploaded using:
 
 There are three tools you need to download for the low-coverage pipeline:
 
-* `XCFTOOLS` - for converting the reference panel
+* `XCFTOOLS` - for converting the reference panel and managing XCF files
 * `SHAPEIT5_phase_common` - for converting the reference panel
 * `IMPUTE5` - for haploid SNP array imputation (>= v1.2)
-* `GLIMPSE2_ligate` - for the ligation step
 
 ### **2.1. Download the tools and copy them inside the right folder**
 
@@ -31,7 +30,6 @@ Several tools are used in this pipeline. Please download each of the tools separ
 * A static version of IMPUTE5 can be downloaded from the [IMPUTE5 website](https://jmarchini.org/software/#impute-5).
 * A static version of XCFTOOLS can be downloaded from the [release section on GitHub.](https://github.com/odelaneau/xcftools/releases) Please refer to the latest version on GitHub rather than the version included in the IMPUTE5 zip, as updates and bug fixes will be added on the GitHub release, but might not be promptly propagated on the IMPUTE5 release.
 * SHAPEIT5\_phase\_common can be downloaded from the [release section on GitHub.](https://github.com/odelaneau/shapeit5/releases)
-* GLIMPSE2\_ligate can be downloaded from the [release section on GitHub](https://github.com/odelaneau/GLIMPSE/releases).
 
 Download the files, remove the `*_static` extension from the filename and copy each program in the `resources/usr/bin/` of the appropriate tool:
 
@@ -77,17 +75,6 @@ mv shapeit5_phase_common snp-array-pipeline/tools/shapeit5_phase_common/resource
 echo "Files successfully copied"
 ```
 {% endcode %}
-
-<pre class="language-bash" data-title="GLIMPSE2_ligate"><code class="lang-bash"><strong>#please change the address to the latest release. This is just an example.
-</strong>wget https://github.com/odelaneau/GLIMPSE/releases/download/v2.0.0/GLIMPSE2_ligate_static &#x26;&#x26;
-#change name, by removing the "_static" extension
-mv GLIMPSE2_ligate_static GLIMPSE2_ligate &#x26;&#x26;
-#permissions
-chmod 777 GLIMPSE2_ligate &#x26;&#x26;
-#copy the tool to the right folder
-mv GLIMPSE2_ligate snp-array-pipeline/tools/ligate/resources/usr/bin/ &#x26;&#x26;
-echo "Files successfully copied"
-</code></pre>
 
 ### **2.2. Create applets**
 
