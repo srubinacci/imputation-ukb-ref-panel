@@ -15,7 +15,7 @@ The names used and the structure of this directory are arbitrary and the user ca
 
 ## 2. First-time usage - Binary reference panel representation
 
-Running the pipeline with default parameters, performing conversion of the reference panel file format and pre-phasing can be done as follows:
+Running the pipeline with default parameters, performing conversion of the reference panel file format can be done as follows:
 
 <pre class="language-bash"><code class="lang-bash"><strong>#get current project ID
 </strong>PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
@@ -35,13 +35,84 @@ Running the pipeline with default parameters, performing conversion of the refer
 done
 </code></pre>
 
-You can specify `-i "run_phase_module=true"` and `-i "run_impute_module=true"` to perform reference panel conversion and the pre-phasing and imputation step subsequently. However, we do not recommend doing so. As the conversion step works with inefficient VCF files, the conversion can take several hours to complete. We therefore recommend splitting the creation of the reference panel from the imputation step.
+You can specify `-i "run_phase_module=true"` and `-i "run_impute_module=true"` to perform reference panel conversion and the pre-phasing and imputation step subsequently, as explained in section 5.&#x20;
 
-Please note that we use the option `-i "mount_inputs=true"` in the command above. The reason is that the provided phased VCF files are very large and we want to access only a region within a chromosome. Therefore, downloading the whole file would be wasteful. The option `-i "run_impute_module=true"` allows us to use the `dxfuse`program to stream the file as it was local, therefore efficiently accessing only the region of interest. However, in the rest of the pipeline, we assume the default `-i "mount_inputs=false"` as we handle much smaller files and downloading is usually more efficient.
+The conversion step works with inefficient VCF files and can take few several hours to complete. We therefore recommend splitting the creation of the reference panel from the pre-phasing/imputation step.
 
-## 3. Subsequent usages - Run imputation
+Please note that we use the option `-i "mount_inputs=true"` in the command above. The reason is that the provided phased VCF files are very large and we want to access only a region within a chromosome. Therefore, downloading the whole file would be wasteful. The option `-i "run_impute_module=true"` allows us to use the `dxfuse`program to stream the file as it was local, therefore efficiently accessing only the region of interest. However, in the rest of the pipeline, we assume the default `-i "mount_inputs=false"` as we handle much smaller files (spanning only region) and downloading them is usually more efficient.
 
-For subsequent usages, the creation of the binary reference panel can be skipped as the reference panel is stored in your project directory. You can therefore run:
+## 3. Subsequent usages - Run pre-phasing
+
+For subsequent usages, the creation of the binary reference panel can be skipped as the reference panel is stored in your project directory. We can run the pre-phasing step using:
+
+```bash
+#get current project ID
+PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
+
+for CHR in 20; do #use {1..22} for all autosomes
+    dx run /ukb-imputation/apps/snp-array-pipeline \
+        --name "snp-array-pipeline-chr${CHR}-b00001"  \
+        -i "project=${PROJ}" \
+        -i "chr=${CHR}" \
+        -i "run_convert_reference_module=false" \
+        -i "run_phase_module=true" \
+        -i "run_convert_target_module=false" \
+        -i "run_impute_module=false" \
+        -i "batch_id=batch_00001" \
+        -y \
+        --brief
+done
+```
+
+Please note we deactivated all other modules. Alternatively, if you have already pre-phased data and want to run imputation without prephasing, you will need to covert your pre-phased data into the XCF format. To run this, you can use the covert target module:
+
+```bash
+#get current project ID
+PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
+
+for CHR in 20; do #use {1..22} for all autosomes
+    dx run /ukb-imputation/apps/snp-array-pipeline \
+        --name "snp-array-pipeline-chr${CHR}-b00001"  \
+        -i "project=${PROJ}" \
+        -i "chr=${CHR}" \
+        -i "run_convert_reference_module=false" \
+        -i "run_phase_module=false" \
+        -i "run_convert_target_module=true" \
+        -i "run_impute_module=false" \
+        -i "batch_id=batch_00001" \
+        -y \
+        --brief
+done
+```
+
+Please note that pre-phasing using the UK Biobank reference panel is **strongly recommended**, as imputation is highly sensitive to accurate pre-phasing.&#x20;
+
+## 4. Subsequent usages - Run imputation
+
+Imputation can be run simply activating the impute module. Data will be imputed in chunks and then assembled (with bcftools concat -n) after imputation:
+
+```bash
+#get current project ID
+PROJ=$(dx env | grep "Current workspace" | head -n 1 | awk -F'\t' '{print $2}')
+
+for CHR in 20; do #use {1..22} for all autosomes
+    dx run /ukb-imputation/apps/snp-array-pipeline \
+        --name "snp-array-pipeline-chr${CHR}-b00001"  \
+        -i "project=${PROJ}" \
+        -i "chr=${CHR}" \
+        -i "run_convert_reference_module=false" \
+        -i "run_phase_module=false" \
+        -i "run_convert_target_module=false" \
+        -i "run_impute_module=true" \
+        -i "batch_id=batch_00001" \
+        -y \
+        --brief
+done
+```
+
+## 5. Combining modules: running pre-phasing and imputation
+
+We recommend to run a step (module) at the time, to enable quick troubleshooting and ensure that the data is correctly managed. However, the pipelines allows you to perform the above steps in a single command. For example, to run pre-phasing and imputation on the same data, you can therefore run:
 
 ```bash
 #get current project ID
@@ -62,9 +133,9 @@ for CHR in 20; do #use {1..22} for all autosomes
 done
 ```
 
-Please note we deactivated the covert reference module. Here we just run pre-phasing and then imputation. As `-i "run_convert_reference_module=false"` is the default, it could be omitted (and the same is true for the convert target module).
+A monitoring job needs to stay active during the execution of each module, until the (final) imputation jobs are submitted. While this can be handy in some occasions, we recommend new users to familiarize with the pipeline running each step separately at first.
 
-## 4. Changing default parameters
+## 6. Changing default parameters
 
 The pipeline has several default parameters that can be changed. To obtain the full list of options, you can run:
 
@@ -95,7 +166,7 @@ for CHR in 20; do #use {1..22} for all autosomes
 done
 ```
 
-## 5. Output and temporary files
+## 7. Output and temporary files
 
 By default, the pipeline keeps the intermediate (chunk-level) imputed files and also provides a chromosome-level file per chromosome. For example, after imputing data for chromosomes 20-22 for a batch of samples (batch\_00000), the pipeline will by default create a subfolder named `batch_00000` in the directory `data/impute5/out/`. The content of this folder will look like this:
 
