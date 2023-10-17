@@ -230,7 +230,7 @@
       "label": "impute5 arguments",
       "class": "string",
       "optional": true,
-      "default": "",
+      "default": "--no-out-index",
       "help": ""
     },
     {
