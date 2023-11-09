@@ -47,7 +47,7 @@ main() {
     echo "Using dxfuse version $(dxfuse -version)"
     dxfuse $MOUNTDIR /home/dnanexus/dxfuse_manifest.json
 
-    ls -1v /mnt/project${inp_pfx}*.bcf > list.txt
+    ls -1v /mnt/project/${inp_pfx}*.bcf > list.txt
     
     GLIMPSE2_ligate --input list.txt --output ${out_pfx}.bcf --threads ${num_thr}
     
