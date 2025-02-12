@@ -154,6 +154,7 @@
     {
       "name": "out_idx",
       "label": "output index file",
+      "optional": true,
       "class": "file",
       "patterns": [
         "*"

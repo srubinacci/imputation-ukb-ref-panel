@@ -71,10 +71,12 @@ main() {
     	map_opt="--m ${map_name}"
     fi
     
-    /usr/bin/time -p -o ${out_pfx}.time impute5 --h ${ref_bcf_name} --g ${tar_bcf_name} ${map_opt} --buffer-region ${buf_reg} --r ${imp_reg} --o ${out_pfx}.bcf --l ${out_pfx}.log --threads ${num_thr} ${imp_args}
+    /usr/bin/time -p -o ${out_pfx}.time impute5 --h ${ref_bcf_name} --g ${tar_bcf_name} ${map_opt} --buffer-region ${buf_reg} --r ${imp_reg} --o ${out_pfx}.bcf --l ${out_pfx}.log --threads ${num_thr} ${imp_arg}
 
     out_bcf=$(dx upload ${out_pfx}.bcf --brief)
-    out_idx=$(dx upload ${out_pfx}.bcf.csi --brief)
+   if [ -f ${out_pfx}.bcf.csi ]; then 
+        out_idx=$(dx upload ${out_pfx}.bcf.csi --brief)
+    fi
     out_log=$(dx upload ${out_pfx}.log --brief)
     out_tim=$(dx upload ${out_pfx}.time --brief)
     
@@ -85,7 +87,9 @@ main() {
     # does.
 
     dx-jobutil-add-output out_bcf "$out_bcf" --class=file
-    dx-jobutil-add-output out_idx "$out_idx" --class=file
+    if [ -f ${out_pfx}.bcf.csi ]; then 
+   	dx-jobutil-add-output out_idx "$out_idx" --class=file
+    fi
     dx-jobutil-add-output out_log "$out_log" --class=file
     dx-jobutil-add-output out_tim "$out_tim" --class=file
 }
