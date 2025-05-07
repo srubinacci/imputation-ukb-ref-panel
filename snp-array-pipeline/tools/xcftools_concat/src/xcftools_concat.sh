@@ -47,6 +47,9 @@ main() {
     echo "Using dxfuse version $(dxfuse -version)"
     dxfuse $MOUNTDIR /home/dnanexus/dxfuse_manifest.json
 
+#    ls -1v /mnt/project/${inp_pfx}*.bcf > list.txt #GD_updated this line
+find /mnt/project/${inp_pfx} -type f -name "*.bin" -size +0c | sed 's/\.bin$/.bcf/' > list.txt
+
     ls -1v /mnt/project/${inp_pfx}*.bcf > list.txt
     
     mode="--ligate"
