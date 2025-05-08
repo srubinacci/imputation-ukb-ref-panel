@@ -47,8 +47,9 @@ main() {
     echo "Using dxfuse version $(dxfuse -version)"
     dxfuse $MOUNTDIR /home/dnanexus/dxfuse_manifest.json
 
-    ls -1v /mnt/project/${inp_pfx}*.bcf > list.txt
-    
+    # find only well-formed (non-empty) xcf.bcf files
+    ls -1vs "/mnt/project/${inp_pfx}"*.bin | awk '$1 > 0 { sub(/\.bin$/, ".bcf", $2); print $2 }' > list.txt
+
     mode="--ligate"
     if [ "$naive" = true ]; then
     	mode="--naive"
